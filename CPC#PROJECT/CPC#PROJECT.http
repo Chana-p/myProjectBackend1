@@ -1,0 +1,6 @@
+@CPC_PROJECT_HostAddress = http://localhost:5298
+
+GET {{CPC_PROJECT_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

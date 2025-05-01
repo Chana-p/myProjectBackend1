@@ -1,0 +1,29 @@
+D:\CPC#PROJECT\Dal\bin\Debug\net8.0\Dal.deps.json
+D:\CPC#PROJECT\Dal\bin\Debug\net8.0\Dal.runtimeconfig.json
+D:\CPC#PROJECT\Dal\bin\Debug\net8.0\Dal.dll
+D:\CPC#PROJECT\Dal\bin\Debug\net8.0\Dal.pdb
+D:\CPC#PROJECT\Dal\obj\Debug\net8.0\Dal.csproj.AssemblyReference.cache
+D:\CPC#PROJECT\Dal\obj\Debug\net8.0\Dal.GeneratedMSBuildEditorConfig.editorconfig
+D:\CPC#PROJECT\Dal\obj\Debug\net8.0\Dal.AssemblyInfoInputs.cache
+D:\CPC#PROJECT\Dal\obj\Debug\net8.0\Dal.AssemblyInfo.cs
+D:\CPC#PROJECT\Dal\obj\Debug\net8.0\Dal.csproj.CoreCompileInputs.cache
+D:\CPC#PROJECT\Dal\obj\Debug\net8.0\Dal.dll
+D:\CPC#PROJECT\Dal\obj\Debug\net8.0\refint\Dal.dll
+D:\CPC#PROJECT\Dal\obj\Debug\net8.0\Dal.pdb
+D:\CPC#PROJECT\Dal\obj\Debug\net8.0\Dal.genruntimeconfig.cache
+D:\CPC#PROJECT\Dal\obj\Debug\net8.0\ref\Dal.dll
+D:\GitHubמה שקיים ב - Copy\c#\Dal\bin\Debug\net8.0\Dal.deps.json
+D:\GitHubמה שקיים ב - Copy\c#\Dal\bin\Debug\net8.0\Dal.runtimeconfig.json
+D:\GitHubמה שקיים ב - Copy\c#\Dal\bin\Debug\net8.0\Dal.dll
+D:\GitHubמה שקיים ב - Copy\c#\Dal\bin\Debug\net8.0\Dal.pdb
+D:\GitHubמה שקיים ב - Copy\c#\Dal\obj\Debug\net8.0\Dal.csproj.AssemblyReference.cache
+D:\GitHubמה שקיים ב - Copy\c#\Dal\obj\Debug\net8.0\Dal.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHubמה שקיים ב - Copy\c#\Dal\obj\Debug\net8.0\Dal.AssemblyInfoInputs.cache
+D:\GitHubמה שקיים ב - Copy\c#\Dal\obj\Debug\net8.0\Dal.AssemblyInfo.cs
+D:\GitHubמה שקיים ב - Copy\c#\Dal\obj\Debug\net8.0\Dal.csproj.CoreCompileInputs.cache
+D:\GitHubמה שקיים ב - Copy\c#\Dal\obj\Debug\net8.0\Dal.dll
+D:\GitHubמה שקיים ב - Copy\c#\Dal\obj\Debug\net8.0\refint\Dal.dll
+D:\GitHubמה שקיים ב - Copy\c#\Dal\obj\Debug\net8.0\Dal.pdb
+D:\GitHubמה שקיים ב - Copy\c#\Dal\obj\Debug\net8.0\Dal.genruntimeconfig.cache
+D:\GitHubמה שקיים ב - Copy\c#\Dal\obj\Debug\net8.0\ref\Dal.dll
+D:\GitHubמה שקיים ב - Copy\c#\Dal\obj\Debug\net8.0\Dal.sourcelink.json
