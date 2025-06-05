@@ -3963,11 +3963,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Desktop\\חני\\מה שיש בגיטהאב\\מה שיש בגיטהאב של הסמינר\\backend\\BackendRepository\\Dal\\Dal.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Desktop\\חני\\מה שיש בגיטהאב\\backend\\BackendRepository\\Dal\\Dal.csproj",
       "projectName": "Dal",
-      "projectPath": "C:\\Users\\user\\Desktop\\חני\\מה שיש בגיטהאב\\מה שיש בגיטהאב של הסמינר\\backend\\BackendRepository\\Dal\\Dal.csproj",
+      "projectPath": "C:\\Users\\user\\Desktop\\חני\\מה שיש בגיטהאב\\backend\\BackendRepository\\Dal\\Dal.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Desktop\\חני\\מה שיש בגיטהאב\\מה שיש בגיטהאב של הסמינר\\backend\\BackendRepository\\Dal\\obj\\",
+      "outputPath": "C:\\Users\\user\\Desktop\\חני\\מה שיש בגיטהאב\\backend\\BackendRepository\\Dal\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

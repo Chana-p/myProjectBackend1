@@ -25,26 +25,22 @@ namespace CPC_PROJECT
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            
+            var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+            builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
             var app = builder.Build();
                 app.UseCors("AllowAll");
                app.UseStaticFiles();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseDeveloperExceptionPage();
             }
-            //add picture
-            //app.UseStaticFiles(new StaticFileOptions
-            //{
-            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Images")),
-            //    RequestPath = "/Images"
-            //});
+          
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-          
+           //for render?
+            app.UseRouting();
 
             app.MapControllers();
 
