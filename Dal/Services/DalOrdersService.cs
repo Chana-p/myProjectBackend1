@@ -18,6 +18,7 @@ namespace Dal.Services
             dbcontext = d;
         }
 
+<<<<<<< HEAD
         public void AssignOrdersToEmp(int empId,int ordId)
         {
             Order o = dbcontext.Orders.ToList().Find(i => i.OrderId == ordId);
@@ -26,6 +27,9 @@ namespace Dal.Services
         }
 
       
+=======
+
+>>>>>>> 3cd299ced9c0d58f45d3f948a703dc21b0ed7550
         public int Create(Order o)
         {
           var x=  dbcontext.Orders.Add(o);
@@ -63,6 +67,7 @@ namespace Dal.Services
             return empList;
         }
 
+<<<<<<< HEAD
        
 
         public void UpdateSending(int orderId, int empId)
@@ -70,9 +75,43 @@ namespace Dal.Services
             Order o = dbcontext.Orders.ToList().Find(e => e.OrderId == orderId);
             o.Sent =true;
             o.EmpId = empId;
+=======
+        public List<Order> GetNews()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateSending(int orderId)
+        {
+            dbcontext.Orders.ToList().Find(e => e.OrderId == orderId).Sent =true;
+>>>>>>> 3cd299ced9c0d58f45d3f948a703dc21b0ed7550
             dbcontext.SaveChanges();
         }
 
 
+<<<<<<< HEAD
+=======
+
+        //List<Order> IDalOrders.Get()
+        //{
+        //    return dbcontext.Orders.ToList();
+
+        //}
+
+        //List<Order> IDalOrders.GetForCustomer(int custId)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //List<Order> IDalOrders.GetForEmployee(int empId)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //List<Order> IDalOrders.GetNews()
+        //{
+        //    throw new NotImplementedException();
+        //}
+>>>>>>> 3cd299ced9c0d58f45d3f948a703dc21b0ed7550
     }
 }

@@ -19,7 +19,16 @@ namespace CPC_PROJECT.Controllers
         {
             return Ok(orders.Get()); //new List<string>() { "sara", "shira", "bracha" };  
         }
+<<<<<<< HEAD
       
+=======
+        // להחזיר רשימת כל ההזמנות
+        [HttpDelete("DeleteAll")]
+        public void Delete()
+        {
+             orders.DeleteAll(); //new List<string>() { "sara", "shira", "bracha" };  
+        }
+>>>>>>> 3cd299ced9c0d58f45d3f948a703dc21b0ed7550
         // להחזיר רשימת כל ההזמנות
         [HttpGet("GetByCustomer/{id}")]
         public IActionResult GetByCustomer(int id)
@@ -31,6 +40,7 @@ namespace CPC_PROJECT.Controllers
         {
             return Ok(orders.GetForEmployee(id));
         }
+<<<<<<< HEAD
         [HttpGet("GetCompletedByEmployee/{id}")]
         public IActionResult GetCompletedByemp(int id)
         {
@@ -46,10 +56,18 @@ namespace CPC_PROJECT.Controllers
         public IActionResult Add(int id,int? empId, [FromBody] List<BLOrderDetail> list)
         {
             int a = orders.Add(id,empId);
+=======
+        //add
+        [HttpPost("addToCustomer/{id}")]
+        public IActionResult Add(int id, [FromBody] List<BLOrderDetail> list)
+        {
+            int a = orders.Add(id);
+>>>>>>> 3cd299ced9c0d58f45d3f948a703dc21b0ed7550
             return Ok(orders.addDetails(list, a));
 
         }
         //update
+<<<<<<< HEAD
         [HttpPut("updateSending/{orderId}/{empId}")]
         public void updateSending(int orderId, int empId)
         {
@@ -65,6 +83,22 @@ namespace CPC_PROJECT.Controllers
 
         }
 
+=======
+        [HttpPut("updateSending/{orderId}")]
+        public void updateSending(int orderId)
+        {
+            
+             orders.UpdateSending(orderId);
+
+        }
+
+        //public IActionResult add(int id, [FromBody]List<BLOrderDetail>list)
+        //{
+        //  int a=orders.Add(id);
+        //  return Ok(orders.addDetails(list,a));
+
+        //}
+>>>>>>> 3cd299ced9c0d58f45d3f948a703dc21b0ed7550
 
 
 

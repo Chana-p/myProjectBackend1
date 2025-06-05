@@ -45,6 +45,14 @@ namespace Dal.Services
 
         public List<ProductsSum> Update(ProductsSum product)
         {
+<<<<<<< HEAD
+=======
+            //List<ProductsSum> ls = Get();
+            //var x = ls.Find(i => i.ProdId == product.ProdId);
+            //product.ProdId=x.ProdId;
+            //dbcontext.ProductsSums.Remove(x);
+            //dbcontext.ProductsSums.Add(product);
+>>>>>>> 3cd299ced9c0d58f45d3f948a703dc21b0ed7550
             dbcontext.ProductsSums.Update(product);
             dbcontext.SaveChanges();
             return Get();

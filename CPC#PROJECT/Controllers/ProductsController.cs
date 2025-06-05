@@ -30,7 +30,45 @@ namespace CPC_PROJECT.Controllers
            // await UploadFile(productPicture);
             return products.Add(p);
         }
+<<<<<<< HEAD
        
+=======
+        [HttpPost("AddFile")]
+        public async Task<IActionResult> UploadFile(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest("No file uploaded.");
+
+            var uploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            var uniqueFileName = Guid.NewGuid().ToString().Substring(0, 8) + Path.GetExtension(file.FileName);
+
+            string folderPath;
+
+            if (file.ContentType.StartsWith("image/"))
+            {
+                folderPath = Path.Combine(uploads, "IMG");
+            }
+            else
+            {
+                folderPath = Path.Combine(uploads, "FILES");
+            }
+
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            var filePath = Path.Combine(folderPath, uniqueFileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return Ok(new { filePath = $"/{(file.ContentType.StartsWith("image/") ? "IMG" : "FILES")}/{uniqueFileName}" });
+        }
+
+>>>>>>> 3cd299ced9c0d58f45d3f948a703dc21b0ed7550
         [HttpPut("Update")]
         public List<BLProduct> Update(BLProduct p)
         {
