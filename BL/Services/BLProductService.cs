@@ -28,7 +28,7 @@ namespace BL.Services
                 Pimporter =product.Pimporter,
                 Pcompany=product.Pcompany,
                 Pdescription=product.Pdescription,
-                Ppicture=product.Ppath
+                Ppicture=product.Ppicture
             };
             dal.Products.Add(DalProduct);
             return Get();
@@ -45,7 +45,7 @@ namespace BL.Services
             List<BLProduct> list = new();
             foreach (var item in dal.Products.Get())
             {
-                if(item.Ppicture.EndsWith(".jpg"))
+                if(item.Ppicture.EndsWith(".jpg")&& !item.Ppicture.StartsWith("/IMG"))
                 list.Add(new BLProduct(item));
             }
             return list;
@@ -69,7 +69,7 @@ namespace BL.Services
                 Pimporter = product.Pimporter,
                 Pcompany = product.Pcompany,
                 Pdescription = product.Pdescription,
-                Ppicture = product.Ppath
+                Ppicture = product.Ppicture
 
             };
             dal.Products.Update(dalProd);

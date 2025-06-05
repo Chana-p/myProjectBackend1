@@ -11,16 +11,17 @@ namespace BL.Api
    public interface IBLOrders
     {
         //void Add(BLOrder bLOrder);
-        int Add(int custId);
+        int Add(int custId,int? empId);
         List<BLOrder> addDetails(List<BLOrderDetail> list,int orderId);
-        void UpdateSending(int orderId);
+        void UpdateSending(int orderId, int empId);
         List<BLOrder> Get();
         void DeleteAll();
         List<BLOrder> GetNews();
         List<BLOrder> GetForCustomer(int custId);
         List<BLOrder> GetForEmployee(int empId);
+        List<BLOrder> GetCompletedForEmployee(int empId);
 
-    //    void Create(Order o, List<OrderDetail> od);
+        void AssignOrders(int empId, List<BLOrder> ordList);
 
 
 

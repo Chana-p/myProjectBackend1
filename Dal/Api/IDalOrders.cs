@@ -11,14 +11,13 @@ namespace Dal.Api
     {
 
         List<Order> Get();
-        List<Order> GetNews();
         List<Order> GetForCustomer(int custId);
         List<Order> GetForEmployee(int empId);
 
-        //void Create(Order o, List<OrderDetail> od);
         int Create(Order o);
         void Delete();
-        void UpdateSending(int orderId);
+        void UpdateSending(int orderId,int empId);
+        void AssignOrdersToEmp(int empId,int ordId);
 
 
     }

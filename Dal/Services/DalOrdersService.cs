@@ -18,7 +18,14 @@ namespace Dal.Services
             dbcontext = d;
         }
 
+        public void AssignOrdersToEmp(int empId,int ordId)
+        {
+            Order o = dbcontext.Orders.ToList().Find(i => i.OrderId == ordId);
+            o.EmpId = empId;
+            dbcontext.Orders.Update(o);
+        }
 
+      
         public int Create(Order o)
         {
           var x=  dbcontext.Orders.Add(o);
@@ -56,38 +63,16 @@ namespace Dal.Services
             return empList;
         }
 
-        public List<Order> GetNews()
-        {
-            throw new NotImplementedException();
-        }
+       
 
-        public void UpdateSending(int orderId)
+        public void UpdateSending(int orderId, int empId)
         {
-            dbcontext.Orders.ToList().Find(e => e.OrderId == orderId).Sent =true;
+            Order o = dbcontext.Orders.ToList().Find(e => e.OrderId == orderId);
+            o.Sent =true;
+            o.EmpId = empId;
             dbcontext.SaveChanges();
         }
 
 
-
-        //List<Order> IDalOrders.Get()
-        //{
-        //    return dbcontext.Orders.ToList();
-
-        //}
-
-        //List<Order> IDalOrders.GetForCustomer(int custId)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //List<Order> IDalOrders.GetForEmployee(int empId)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //List<Order> IDalOrders.GetNews()
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

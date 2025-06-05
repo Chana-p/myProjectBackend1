@@ -19,9 +19,9 @@ namespace BL.Models
         public string Pimporter { get; set; } = null!;
 
         public string? Pcompany { get; set; }
-        public string? Ppath { get; set; }
-       // public string Ppicture { get; set; }
-        public byte[] Ppicture { get; set; }
+        //public string? Ppath { get; set; }
+        public string Ppicture { get; set; }
+        //public byte[] Ppicture { get; set; }
 
         public string? Pdescription { get; set; }
 
@@ -35,9 +35,9 @@ namespace BL.Models
             this.Psum = p.Psum;
             this.Pname = p.Pname;
             this.Pimporter = p.Pimporter;
-            this.Ppath = "D:\\GitHubמה שקיים ב - Copy\\c#\\CPC#PROJECT\\wwwroot\\img\\"+p.Ppicture;
-            this.Ppicture =
-                File.ReadAllBytes(Ppath);
+          //  this.Ppath = "D:\\GitHubמה שקיים ב - Copy\\c#\\CPC#PROJECT\\wwwroot\\img\\"+p.Ppicture;
+            this.Ppicture =p.Ppicture;
+            //File.ReadAllBytes(Ppath);
 
         }
 

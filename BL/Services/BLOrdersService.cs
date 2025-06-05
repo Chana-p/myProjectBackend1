@@ -19,19 +19,14 @@ namespace BL.Services
             this.Dal = dal;
         }
 
-        public int Add(int custId)
+        public int Add(int custId, int? empId)
         {
-            DateTime dt=DateTime.Now;
-            Console.WriteLine("DateTime in Normal format: ");
-            string sqlFormattedDate=dt.ToString("yyyy-MM-dd HH:mm:ss");
-            Console.WriteLine("DateTime in SQL format: ");
-            
-                        Order o = new()
+            Order o = new()
             {
                 
                 OrderDate= DateOnly.FromDateTime(DateTime.Today).ToShortDateString(),
                 CustId = custId,
-                EmpId = Dal.Employees.AvailableEmployee().EmpId,
+                EmpId = empId==0?empId:null,
                 //PaymentType = bLOrder.PaymentType,
                 Sent = false
             };
@@ -49,6 +44,7 @@ namespace BL.Services
                     ProdId=item.ProdId,
                     Count=item.Count
                 };
+                Dal.Products.UpdateSum(item.ProdId, item.Count);
                 dalList.Add(od);
             }
             Dal.OrderDetail.addDetailsForOrder(dalList);
@@ -67,14 +63,21 @@ namespace BL.Services
 
         public List<BLOrder> Get()
         {
-         List<Order>  dallist=Dal.Orders.Get();
-         List<BLOrder>  bllist=new();
+            List<Order> dallist = Dal.Orders.Get();
+            List<BLOrder> bllist = new();
 
             foreach (var item in dallist)
             {
-               string email= Dal.Employees.getByID(item.EmpId).Egmail;
-               string name= Dal.Employees.getByID(item.EmpId).Ename;
-                bllist.Add(new BLOrder(item,email,name));
+                string email = null;
+                string name = null;
+
+                if (item.EmpId.HasValue) // Check if EmpId has a value
+                {
+                    email = Dal.Employees.getByID(item.EmpId.Value).Egmail; // Use .Value to access the int value
+                    name = Dal.Employees.getByID(item.EmpId.Value).Ename;
+                }
+
+                bllist.Add(new BLOrder(item, email, name));
             }
             return bllist;
         }
@@ -83,12 +86,19 @@ namespace BL.Services
         {
             List<Order> dallist = Dal.Orders.GetForCustomer(custId);
             List<BLOrder> bllist = new();
-            
+
             foreach (var item in dallist)
             {
-                string email = Dal.Employees.getByID(item.EmpId).Egmail;
-                string name = Dal.Employees.getByID(item.EmpId).Ename;
-                bllist.Add(new BLOrder(item,email,name));
+                string email = null;
+                string name = null;
+
+                if (item.EmpId.HasValue) // Check if EmpId has a value
+                {
+                    email = Dal.Employees.getByID(item.EmpId.Value).Egmail; // Use .Value to access the int value
+                    name = Dal.Employees.getByID(item.EmpId.Value).Ename;
+                }
+
+                bllist.Add(new BLOrder(item, email, name));
             }
             return bllist;
         }
@@ -100,23 +110,66 @@ namespace BL.Services
 
             foreach (var item in dallist)
             {
+                if (!(bool)item.Sent)
+                {
                 string email = Dal.Customers.Get().ToList().Find(cust=>cust.CustId==item.CustId).CustEmail;
                 string name = Dal.Customers.Get().ToList().Find(cust => cust.CustId == item.CustId).CustName;
                 bllist.Add(new BLOrder(item, email, name));
+                }
+                
             }
             return bllist;
         }
-        
+        public List<BLOrder> GetCompletedForEmployee(int empId)
+        {
+            List<Order> dallist = Dal.Orders.GetForEmployee(empId);
+            List<BLOrder> bllist = new();
+
+            foreach (var item in dallist)
+            {
+                if ((bool)item.Sent)
+                {
+                string email = Dal.Customers.Get().ToList().Find(cust => cust.CustId == item.CustId).CustEmail;
+                string name = Dal.Customers.Get().ToList().Find(cust => cust.CustId == item.CustId).CustName;
+                bllist.Add(new BLOrder(item, email, name));
+                }
+             
+            }
+            return bllist;
+        }
+
         public List<BLOrder> GetNews()
         {
-            throw new NotImplementedException();
+            List<Order> dallist = Dal.Orders.Get();
+            List<BLOrder> bllist = new();
+
+            foreach (var item in dallist)
+            {
+                if (item.Sent == false && item.EmpId == 0) { 
+                    string email = Dal.Customers.Get().ToList().Find(cust => cust.CustId == item.CustId).CustEmail;
+                    string name = Dal.Customers.Get().ToList().Find(cust => cust.CustId == item.CustId).CustName;
+                    bllist.Add(new BLOrder(item, email, name));
+                }
+            }
+            return bllist;
         }
         //the employee update about  sending the order
-        public void UpdateSending(int orderId)
+        public void UpdateSending(int orderId,int empId)
         {
-            Dal.Orders.UpdateSending(orderId);
+            Dal.Orders.UpdateSending(orderId, empId);
             //List<OrderDetail> sendingProducts = Dal.Orders.Get().ToList().Find(p => p.OrderId == orderId).orderdetails;
             //Dal.Products.UpdateAmount(prodId);
         }
+      
+
+        public void AssignOrders(int empId, List<BLOrder> orderList)
+        {
+            orderList.ToList().ForEach(o =>
+            {
+                Dal.Orders.AssignOrdersToEmp(empId, o.OrderId);
+            });
+        }
+
+       
     }
 }

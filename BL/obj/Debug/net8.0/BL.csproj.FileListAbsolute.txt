@@ -29,3 +29,19 @@ D:\GitHubמה שקיים ב - Copy\c#\BL\obj\Debug\net8.0\refint\BL.dll
 D:\GitHubמה שקיים ב - Copy\c#\BL\obj\Debug\net8.0\BL.pdb
 D:\GitHubמה שקיים ב - Copy\c#\BL\obj\Debug\net8.0\ref\BL.dll
 D:\GitHubמה שקיים ב - Copy\c#\BL\obj\Debug\net8.0\BL.sourcelink.json
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\BL\bin\Debug\net8.0\BL.deps.json
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\BL\bin\Debug\net8.0\BL.dll
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\BL\bin\Debug\net8.0\BL.pdb
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\BL\bin\Debug\net8.0\Dal.dll
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\BL\bin\Debug\net8.0\Dal.pdb
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\BL\obj\Debug\net8.0\BL.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\BL\obj\Debug\net8.0\BL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\BL\obj\Debug\net8.0\BL.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\BL\obj\Debug\net8.0\BL.AssemblyInfo.cs
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\BL\obj\Debug\net8.0\BL.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\BL\obj\Debug\net8.0\BL.sourcelink.json
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\BL\obj\Debug\net8.0\BL.csproj.Up2Date
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\BL\obj\Debug\net8.0\BL.dll
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\BL\obj\Debug\net8.0\refint\BL.dll
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\BL\obj\Debug\net8.0\BL.pdb
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\BL\obj\Debug\net8.0\ref\BL.dll

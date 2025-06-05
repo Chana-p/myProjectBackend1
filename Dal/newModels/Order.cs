@@ -11,7 +11,7 @@ public partial class Order
 
     public int CustId { get; set; }
 
-    public int EmpId { get; set; }
+    public int? EmpId { get; set; }
 
     public string? PaymentType { get; set; }
 

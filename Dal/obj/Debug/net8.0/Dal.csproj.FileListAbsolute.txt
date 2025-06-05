@@ -27,3 +27,18 @@ D:\GitHubמה שקיים ב - Copy\c#\Dal\obj\Debug\net8.0\Dal.pdb
 D:\GitHubמה שקיים ב - Copy\c#\Dal\obj\Debug\net8.0\Dal.genruntimeconfig.cache
 D:\GitHubמה שקיים ב - Copy\c#\Dal\obj\Debug\net8.0\ref\Dal.dll
 D:\GitHubמה שקיים ב - Copy\c#\Dal\obj\Debug\net8.0\Dal.sourcelink.json
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\Dal\bin\Debug\net8.0\Dal.deps.json
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\Dal\bin\Debug\net8.0\Dal.runtimeconfig.json
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\Dal\bin\Debug\net8.0\Dal.dll
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\Dal\bin\Debug\net8.0\Dal.pdb
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\Dal\obj\Debug\net8.0\Dal.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\Dal\obj\Debug\net8.0\Dal.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\Dal\obj\Debug\net8.0\Dal.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\Dal\obj\Debug\net8.0\Dal.AssemblyInfo.cs
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\Dal\obj\Debug\net8.0\Dal.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\Dal\obj\Debug\net8.0\Dal.sourcelink.json
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\Dal\obj\Debug\net8.0\Dal.dll
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\Dal\obj\Debug\net8.0\refint\Dal.dll
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\Dal\obj\Debug\net8.0\Dal.pdb
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\Dal\obj\Debug\net8.0\Dal.genruntimeconfig.cache
+C:\Users\user\Desktop\חני\מה שיש בגיטהאב\מה שיש בגיטהאב של הסמינר\backend\BackendRepository\Dal\obj\Debug\net8.0\ref\Dal.dll

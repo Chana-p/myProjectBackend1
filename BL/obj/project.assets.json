@@ -2758,28 +2758,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\שיף חני\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\GitHubמה שקיים ב - Copy\\c#\\BL\\BL.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Desktop\\חני\\מה שיש בגיטהאב\\מה שיש בגיטהאב של הסמינר\\backend\\BackendRepository\\BL\\BL.csproj",
       "projectName": "BL",
-      "projectPath": "D:\\GitHubמה שקיים ב - Copy\\c#\\BL\\BL.csproj",
-      "packagesPath": "C:\\Users\\שיף חני\\.nuget\\packages\\",
-      "outputPath": "D:\\GitHubמה שקיים ב - Copy\\c#\\BL\\obj\\",
+      "projectPath": "C:\\Users\\user\\Desktop\\חני\\מה שיש בגיטהאב\\מה שיש בגיטהאב של הסמינר\\backend\\BackendRepository\\BL\\BL.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\user\\Desktop\\חני\\מה שיש בגיטהאב\\מה שיש בגיטהאב של הסמינר\\backend\\BackendRepository\\BL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\שיף חני\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -2793,8 +2790,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\GitHubמה שקיים ב - Copy\\c#\\Dal\\Dal.csproj": {
-              "projectPath": "D:\\GitHubמה שקיים ב - Copy\\c#\\Dal\\Dal.csproj"
+            "C:\\Users\\user\\Desktop\\חני\\מה שיש בגיטהאב\\מה שיש בגיטהאב של הסמינר\\backend\\BackendRepository\\Dal\\Dal.csproj": {
+              "projectPath": "C:\\Users\\user\\Desktop\\חני\\מה שיש בגיטהאב\\מה שיש בגיטהאב של הסמינר\\backend\\BackendRepository\\Dal\\Dal.csproj"
             }
           }
         }
