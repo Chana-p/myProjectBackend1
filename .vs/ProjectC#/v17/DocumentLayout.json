@@ -3,6 +3,46 @@
   "WorkspaceRootPath": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BB7B744F-C3DD-4F9A-88DA-A28F57785A03}|CPC#PROJECT\\Server.csproj|c:\\users\\user\\desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\backendrepository\\cpc#project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB7B744F-C3DD-4F9A-88DA-A28F57785A03}|CPC#PROJECT\\Server.csproj|solutionrelative:cpc#project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB7B744F-C3DD-4F9A-88DA-A28F57785A03}|CPC#PROJECT\\Server.csproj|c:\\users\\user\\desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\backendrepository\\cpc#project\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB7B744F-C3DD-4F9A-88DA-A28F57785A03}|CPC#PROJECT\\Server.csproj|solutionrelative:cpc#project\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB7B744F-C3DD-4F9A-88DA-A28F57785A03}|CPC#PROJECT\\Server.csproj|c:\\users\\user\\desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\backendrepository\\cpc#project\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB7B744F-C3DD-4F9A-88DA-A28F57785A03}|CPC#PROJECT\\Server.csproj|solutionrelative:cpc#project\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA32BAB7-82F1-4629-B572-6659E8A10126}|BL\\BL.csproj|c:\\users\\user\\desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\backendrepository\\bl\\models\\blorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA32BAB7-82F1-4629-B572-6659E8A10126}|BL\\BL.csproj|solutionrelative:bl\\models\\blorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24F91DCC-87A6-44C2-82C4-9A126520A229}|Dal\\Dal.csproj|c:\\users\\user\\desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\backendrepository\\dal\\newmodels\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24F91DCC-87A6-44C2-82C4-9A126520A229}|Dal\\Dal.csproj|solutionrelative:dal\\newmodels\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA32BAB7-82F1-4629-B572-6659E8A10126}|BL\\BL.csproj|c:\\users\\user\\desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\backendrepository\\bl\\services\\blproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA32BAB7-82F1-4629-B572-6659E8A10126}|BL\\BL.csproj|solutionrelative:bl\\services\\blproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA32BAB7-82F1-4629-B572-6659E8A10126}|BL\\BL.csproj|c:\\users\\user\\desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\backendrepository\\bl\\services\\blordersservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA32BAB7-82F1-4629-B572-6659E8A10126}|BL\\BL.csproj|solutionrelative:bl\\services\\blordersservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA32BAB7-82F1-4629-B572-6659E8A10126}|BL\\BL.csproj|c:\\users\\user\\desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\backendrepository\\bl\\models\\blproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA32BAB7-82F1-4629-B572-6659E8A10126}|BL\\BL.csproj|solutionrelative:bl\\models\\blproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24F91DCC-87A6-44C2-82C4-9A126520A229}|Dal\\Dal.csproj|c:\\users\\user\\desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\backendrepository\\dal\\newmodels\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24F91DCC-87A6-44C2-82C4-9A126520A229}|Dal\\Dal.csproj|solutionrelative:dal\\newmodels\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA32BAB7-82F1-4629-B572-6659E8A10126}|BL\\BL.csproj|c:\\users\\user\\desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\backendrepository\\bl\\api\\iblorders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EA32BAB7-82F1-4629-B572-6659E8A10126}|BL\\BL.csproj|solutionrelative:bl\\api\\iblorders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{24F91DCC-87A6-44C2-82C4-9A126520A229}|Dal\\Dal.csproj|c:\\users\\user\\desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\backendrepository\\dal\\services\\dalproductsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{24F91DCC-87A6-44C2-82C4-9A126520A229}|Dal\\Dal.csproj|solutionrelative:dal\\services\\dalproductsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,10 +53,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{24F91DCC-87A6-44C2-82C4-9A126520A229}|Dal\\Dal.csproj|c:\\users\\user\\desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\backendrepository\\dal\\services\\dalemployeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{24F91DCC-87A6-44C2-82C4-9A126520A229}|Dal\\Dal.csproj|solutionrelative:dal\\services\\dalemployeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{24F91DCC-87A6-44C2-82C4-9A126520A229}|Dal\\Dal.csproj|c:\\users\\user\\desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\backendrepository\\dal\\newmodels\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{24F91DCC-87A6-44C2-82C4-9A126520A229}|Dal\\Dal.csproj|solutionrelative:dal\\newmodels\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BB7B744F-C3DD-4F9A-88DA-A28F57785A03}|CPC#PROJECT\\Server.csproj|c:\\users\\user\\desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\backendrepository\\cpc#project\\dockerfile||{3B902123-F8A7-4915-9F01-361F908088D0}",
@@ -35,6 +71,123 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\CPC#PROJECT\\Program.cs",
+              "RelativeDocumentMoniker": "CPC#PROJECT\\Program.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\CPC#PROJECT\\Program.cs*",
+              "RelativeToolTip": "CPC#PROJECT\\Program.cs*",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T06:41:41.825Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\CPC#PROJECT\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "CPC#PROJECT\\Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\CPC#PROJECT\\Controllers\\ProductsController.cs*",
+              "RelativeToolTip": "CPC#PROJECT\\Controllers\\ProductsController.cs*",
+              "ViewState": "AgIAACAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T06:40:25.298Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "OrdersController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\CPC#PROJECT\\Controllers\\OrdersController.cs",
+              "RelativeDocumentMoniker": "CPC#PROJECT\\Controllers\\OrdersController.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\CPC#PROJECT\\Controllers\\OrdersController.cs*",
+              "RelativeToolTip": "CPC#PROJECT\\Controllers\\OrdersController.cs*",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAAC4AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T06:40:09.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "dbcontext.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\Dal\\newModels\\dbcontext.cs",
+              "RelativeDocumentMoniker": "Dal\\newModels\\dbcontext.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\Dal\\newModels\\dbcontext.cs",
+              "RelativeToolTip": "Dal\\newModels\\dbcontext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T13:43:29.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BLProductService.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\BL\\Services\\BLProductService.cs",
+              "RelativeDocumentMoniker": "BL\\Services\\BLProductService.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\BL\\Services\\BLProductService.cs",
+              "RelativeToolTip": "BL\\Services\\BLProductService.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAASwEoAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T13:42:26.128Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BLOrdersService.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\BL\\Services\\BLOrdersService.cs",
+              "RelativeDocumentMoniker": "BL\\Services\\BLOrdersService.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\BL\\Services\\BLOrdersService.cs",
+              "RelativeToolTip": "BL\\Services\\BLOrdersService.cs",
+              "ViewState": "AgIAALEAAAAAAAAAAAAAALcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T13:40:27.265Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BLProduct.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\BL\\Models\\BLProduct.cs",
+              "RelativeDocumentMoniker": "BL\\Models\\BLProduct.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\BL\\Models\\BLProduct.cs",
+              "RelativeToolTip": "BL\\Models\\BLProduct.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAArwCYAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T13:39:37.839Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BLOrder.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\BL\\Models\\BLOrder.cs",
+              "RelativeDocumentMoniker": "BL\\Models\\BLOrder.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\BL\\Models\\BLOrder.cs",
+              "RelativeToolTip": "BL\\Models\\BLOrder.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T13:37:40.154Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "IBLOrders.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\BL\\Api\\IBLOrders.cs",
+              "RelativeDocumentMoniker": "BL\\Api\\IBLOrders.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\BL\\Api\\IBLOrders.cs",
+              "RelativeToolTip": "BL\\Api\\IBLOrders.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAcwBoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T13:37:03.934Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "DalProductsService.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\Dal\\Services\\DalProductsService.cs",
               "RelativeDocumentMoniker": "Dal\\Services\\DalProductsService.cs",
@@ -47,7 +200,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 11,
               "Title": "DalOrdersService.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\Dal\\Services\\DalOrdersService.cs",
               "RelativeDocumentMoniker": "Dal\\Services\\DalOrdersService.cs",
@@ -60,7 +213,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 12,
               "Title": "DalEmployeeService.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\Dal\\Services\\DalEmployeeService.cs",
               "RelativeDocumentMoniker": "Dal\\Services\\DalEmployeeService.cs",
@@ -73,20 +226,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "Order.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\Dal\\newModels\\Order.cs",
               "RelativeDocumentMoniker": "Dal\\newModels\\Order.cs",
               "ToolTip": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\Dal\\newModels\\Order.cs",
               "RelativeToolTip": "Dal\\newModels\\Order.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAswA4AAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-05T13:22:24.073Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 13,
               "Title": "Dockerfile",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\\u05D7\u05E0\u05D9\\\u05DE\u05D4 \u05E9\u05D9\u05E9 \u05D1\u05D2\u05D9\u05D8\u05D4\u05D0\u05D1\\backend\\BackendRepository\\CPC#PROJECT\\Dockerfile",
               "RelativeDocumentMoniker": "CPC#PROJECT\\Dockerfile",
