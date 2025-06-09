@@ -11,7 +11,7 @@ namespace CPC_PROJECT.Controllers
     [ApiController]
     public class CustomerController:ControllerBase
     {
-        IBLCustomer customers;// = new BlPatientService();
+        IBLCustomer customers;
         public CustomerController(IBL manager)
         {
             customers = manager.Customers;// כאן קבלנו אוביקט שהוא שרות של פצינטים
