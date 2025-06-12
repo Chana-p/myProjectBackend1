@@ -312,13 +312,15 @@ else
         private static void ConfigureDatabase(IServiceCollection services, string connectionString, IWebHostEnvironment environment)
         {
             // בדיקה אם זה PostgreSQL (production) או SQL Server (development)
-            bool isPostgreSQL = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DATABASE_URL")) || 
-                               connectionString.Contains("Host=");
+            // bool isPostgreSQL = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DATABASE_URL")) || 
+            //                    connectionString.Contains("Host=");
 
             services.AddDbContext<dbcontext>(options =>
             {
-                if (isPostgreSQL)
-                {
+                    Console.WriteLine("trying database");
+
+                // if (isPostgreSQL)
+                // {
                     // PostgreSQL עבור production (Render)
                     options.UseNpgsql(connectionString, npgsqlOptions =>
                     {
@@ -326,17 +328,17 @@ else
                         npgsqlOptions.EnableRetryOnFailure(3);
                     });
                     Console.WriteLine("Using PostgreSQL database");
-                }
-                else
-                {
-                    // SQL Server עבור development
-                    options.UseSqlServer(connectionString, sqlOptions =>
-                    {
-                        sqlOptions.CommandTimeout(30);
-                        sqlOptions.EnableRetryOnFailure(3);
-                    });
-                    Console.WriteLine("Using SQL Server database");
-                }
+                // }
+                // else
+                // {
+                //     // SQL Server עבור development
+                //     options.UseSqlServer(connectionString, sqlOptions =>
+                //     {
+                //         sqlOptions.CommandTimeout(30);
+                //         sqlOptions.EnableRetryOnFailure(3);
+                //     });
+                //     Console.WriteLine("Using SQL Server database");
+                // }
 
                 if (environment.IsDevelopment())
                 {
