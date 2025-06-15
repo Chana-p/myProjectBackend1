@@ -308,8 +308,9 @@ namespace CPC_PROJECT
                 app.MapControllers();
 
                 // Add a health check endpoint
-                app.MapGet("/health", () => Results.Ok(new { 
-                    status = "healthy", 
+                app.MapGet("/health", () => Results.Ok(new
+                {
+                    status = "healthy",
                     timestamp = DateTime.UtcNow,
                     environment = app.Environment.EnvironmentName
                 }));
@@ -319,7 +320,8 @@ namespace CPC_PROJECT
 
                 // Run migrations
                 await RunMigrationsAsync(app);
-
+                // Seed database with initial data
+                await SeedDatabaseAsync(app);
                 Console.WriteLine($"Application starting on port {port}");
                 app.Run();
             }
@@ -334,7 +336,7 @@ namespace CPC_PROJECT
         private static string GetConnectionString(IConfiguration configuration)
         {
             var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
-            
+
             if (!string.IsNullOrEmpty(databaseUrl))
             {
                 Console.WriteLine("Using DATABASE_URL from environment");
@@ -347,50 +349,50 @@ namespace CPC_PROJECT
             return connString;
         }
 
-      private static string ConvertPostgreSQLUrl(string databaseUrl)
-{
-    try
-    {
-        Console.WriteLine($"Parsing DATABASE_URL: {databaseUrl.Substring(0, Math.Min(30, databaseUrl.Length))}...");
-        
-        var uri = new Uri(databaseUrl);
-        var userInfo = uri.UserInfo.Split(':');
-        
-        // Validate required components
-        if (string.IsNullOrEmpty(uri.Host))
-            throw new InvalidOperationException("Host is missing from DATABASE_URL");
-        
-        if (userInfo.Length != 2 || string.IsNullOrEmpty(userInfo[0]) || string.IsNullOrEmpty(userInfo[1]))
-            throw new InvalidOperationException("Username or password is missing from DATABASE_URL");
-        
-        if (string.IsNullOrEmpty(uri.LocalPath) || uri.LocalPath.Length <= 1)
-            throw new InvalidOperationException("Database name is missing from DATABASE_URL");
-        
-        // Handle default PostgreSQL port if not specified
-        var port = uri.Port == -1 ? 5432 : uri.Port;
-        var database = uri.LocalPath.Substring(1);
-        
-        Console.WriteLine($"Parsed connection - Host: {uri.Host}, Port: {port}, Database: {database}, Username: {userInfo[0]}");
-        
-        return $"Host={uri.Host};Port={port};Database={database};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true;Timeout=60;Command Timeout=60;Pooling=true;MinPoolSize=1;MaxPoolSize=20;";
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Error parsing DATABASE_URL: {ex.Message}");
-        throw new InvalidOperationException($"Failed to parse DATABASE_URL: {ex.Message}", ex);
-    }
-}
+        private static string ConvertPostgreSQLUrl(string databaseUrl)
+        {
+            try
+            {
+                Console.WriteLine($"Parsing DATABASE_URL: {databaseUrl.Substring(0, Math.Min(30, databaseUrl.Length))}...");
+
+                var uri = new Uri(databaseUrl);
+                var userInfo = uri.UserInfo.Split(':');
+
+                // Validate required components
+                if (string.IsNullOrEmpty(uri.Host))
+                    throw new InvalidOperationException("Host is missing from DATABASE_URL");
+
+                if (userInfo.Length != 2 || string.IsNullOrEmpty(userInfo[0]) || string.IsNullOrEmpty(userInfo[1]))
+                    throw new InvalidOperationException("Username or password is missing from DATABASE_URL");
+
+                if (string.IsNullOrEmpty(uri.LocalPath) || uri.LocalPath.Length <= 1)
+                    throw new InvalidOperationException("Database name is missing from DATABASE_URL");
+
+                // Handle default PostgreSQL port if not specified
+                var port = uri.Port == -1 ? 5432 : uri.Port;
+                var database = uri.LocalPath.Substring(1);
+
+                Console.WriteLine($"Parsed connection - Host: {uri.Host}, Port: {port}, Database: {database}, Username: {userInfo[0]}");
+
+                return $"Host={uri.Host};Port={port};Database={database};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true;Timeout=60;Command Timeout=60;Pooling=true;MinPoolSize=1;MaxPoolSize=20;";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error parsing DATABASE_URL: {ex.Message}");
+                throw new InvalidOperationException($"Failed to parse DATABASE_URL: {ex.Message}", ex);
+            }
+        }
 
         private static async Task TestDatabaseConnection(WebApplication app)
         {
             using var scope = app.Services.CreateScope();
             var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-            
+
             try
             {
                 var context = scope.ServiceProvider.GetRequiredService<dbcontext>();
                 logger.LogInformation("Testing database connection...");
-                
+
                 var canConnect = await context.Database.CanConnectAsync();
                 if (canConnect)
                 {
@@ -411,11 +413,11 @@ namespace CPC_PROJECT
         {
             using var scope = app.Services.CreateScope();
             var migrationLogger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-            
+
             try
             {
                 var context = scope.ServiceProvider.GetRequiredService<dbcontext>();
-                
+
                 migrationLogger.LogInformation("Starting database migration...");
                 await context.Database.MigrateAsync();
                 migrationLogger.LogInformation("Database migration completed successfully");
@@ -423,7 +425,7 @@ namespace CPC_PROJECT
             catch (Exception ex)
             {
                 migrationLogger.LogError(ex, "Database migration failed: {Error}", ex.Message);
-                
+
                 // Don't throw in production - let the app start even if migrations fail
                 if (app.Environment.IsDevelopment())
                 {
@@ -431,5 +433,77 @@ namespace CPC_PROJECT
                 }
             }
         }
+
+        static async Task SeedDatabaseAsync(WebApplication app)
+        {
+            using var scope = app.Services.CreateScope();
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+
+            try
+            {
+                var context = scope.ServiceProvider.GetRequiredService<dbcontext>();
+
+                logger.LogInformation("Starting database seeding...");
+
+                // בדיקה אם כבר יש נתונים
+                if (!context.Customers.Any())
+                {
+                    var customers = new List<Customer>
+            {
+
+                new Customer
+                {
+                    CustId = 12345,
+                    CustNum = 1,
+                    CustName = "jonatan",
+                    CustAddress = "ירמיהו 3",
+                    CustEmail = "jjjjjjjjjjjj",
+                    CustPhone = "0556750905"
+                }
+            };
+
+                    context.Customers.AddRange(customers);
+                    await context.SaveChangesAsync();
+
+                    logger.LogInformation("Database seeding completed successfully");
+                }
+                if (!context.Employees.Any())
+                {
+                    var employees = new List<Employee>
+            {
+                new Employee
+                {
+                    EmpId = 1,
+                    EmpNum = 1001,
+                    Ename = "Manager",
+                    Egmail = "john.manager@company.com",
+                    Ephone = "050-1111111"
+                },
+                new Employee
+                {
+                    EmpId = 4545,
+                    EmpNum = 1002,
+                    Ename = "moshe",
+                    Egmail = "moshe.worker@company.com",
+                    Ephone = "050-2222222"
+                } };
+
+                    context.Employees.AddRange(employees);
+                    await context.SaveChangesAsync();
+                    logger.LogInformation("Employees seeded successfully");
+                }
+
+                else
+                {
+                    logger.LogInformation("Database already contains data, skipping seeding");
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Database seeding failed: {Error}", ex.Message);
+            }
+        }
+
     }
+
 }
