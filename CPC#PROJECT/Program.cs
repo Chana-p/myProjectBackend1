@@ -338,6 +338,7 @@ namespace CPC_PROJECT
             if (!string.IsNullOrEmpty(databaseUrl))
             {
                 Console.WriteLine("Using DATABASE_URL from environment");
+                Console.WriteLine($"Raw DATABASE_URL: {databaseUrl.Substring(0, Math.Min(50, databaseUrl.Length))}...");
                 return ConvertPostgreSQLUrl(databaseUrl);
             }
 
@@ -346,20 +347,39 @@ namespace CPC_PROJECT
             return connString;
         }
 
-        private static string ConvertPostgreSQLUrl(string databaseUrl)
-        {
-            try
-            {
-                var uri = new Uri(databaseUrl);
-                var userInfo = uri.UserInfo.Split(':');
-                
-                return $"Host={uri.Host};Port={uri.Port};Database={uri.LocalPath.Substring(1)};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true;Timeout=60;Command Timeout=60;Pooling=true;MinPoolSize=1;MaxPoolSize=20;";
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException($"Failed to parse DATABASE_URL: {ex.Message}");
-            }
-        }
+      private static string ConvertPostgreSQLUrl(string databaseUrl)
+{
+    try
+    {
+        Console.WriteLine($"Parsing DATABASE_URL: {databaseUrl.Substring(0, Math.Min(30, databaseUrl.Length))}...");
+        
+        var uri = new Uri(databaseUrl);
+        var userInfo = uri.UserInfo.Split(':');
+        
+        // Validate required components
+        if (string.IsNullOrEmpty(uri.Host))
+            throw new InvalidOperationException("Host is missing from DATABASE_URL");
+        
+        if (userInfo.Length != 2 || string.IsNullOrEmpty(userInfo[0]) || string.IsNullOrEmpty(userInfo[1]))
+            throw new InvalidOperationException("Username or password is missing from DATABASE_URL");
+        
+        if (string.IsNullOrEmpty(uri.LocalPath) || uri.LocalPath.Length <= 1)
+            throw new InvalidOperationException("Database name is missing from DATABASE_URL");
+        
+        // Handle default PostgreSQL port if not specified
+        var port = uri.Port == -1 ? 5432 : uri.Port;
+        var database = uri.LocalPath.Substring(1);
+        
+        Console.WriteLine($"Parsed connection - Host: {uri.Host}, Port: {port}, Database: {database}, Username: {userInfo[0]}");
+        
+        return $"Host={uri.Host};Port={port};Database={database};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true;Timeout=60;Command Timeout=60;Pooling=true;MinPoolSize=1;MaxPoolSize=20;";
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error parsing DATABASE_URL: {ex.Message}");
+        throw new InvalidOperationException($"Failed to parse DATABASE_URL: {ex.Message}", ex);
+    }
+}
 
         private static async Task TestDatabaseConnection(WebApplication app)
         {
