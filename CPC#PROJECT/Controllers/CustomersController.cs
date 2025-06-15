@@ -24,11 +24,47 @@ namespace CPC_PROJECT.Controllers
         }
         //logIn
         [HttpGet("logIn/{id}/{name}")]
-        public IActionResult LogIn(int id,string name)
+        public async Task<IActionResult> LogIn(int id, string name)
         {
-         return Ok( customers.GetById(id,name));
-           
+            try
+            {
+                _logger.LogInformation("Login attempt for ID: {Id}, Name: {Name}", id, name);
+                
+                var result = _bl.Customers.GetById(id, name);
+                
+                if (result == null)
+                {
+                    _logger.LogWarning("Customer not found for ID: {Id}, Name: {Name}", id, name);
+                    return NotFound(new { message = "Customer not found" });
+                }
+
+                _logger.LogInformation("Login successful for ID: {Id}", id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during login for ID: {Id}, Name: {Name}", id, name);
+                return StatusCode(500, new { 
+                    message = "An error occurred during login",
+                    error = ex.Message 
+                });
+            }
         }
+
+        [HttpGet("test")]
+        public IActionResult Test()
+        {
+            return Ok(new { 
+                message = "Customer controller is working", 
+                timestamp = DateTime.UtcNow 
+            });
+        }
+        // [HttpGet("logIn/{id}/{name}")]
+        // public IActionResult LogIn(int id,string name)
+        // {
+        //  return Ok( customers.GetById(id,name));
+           
+        // }
         //logOn
         [HttpPost("logOn")]
         public IActionResult Create([FromBody]BLCustomer newCustomer)

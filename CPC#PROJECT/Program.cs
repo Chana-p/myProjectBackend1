@@ -3,13 +3,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Dal.newModels;
 using BL;
 using BL.Api;
-using Microsoft.Extensions.FileProviders;
-using System.Runtime.CompilerServices;
 using Dal;
 using Dal.Api;
-using Dal.Services;
-using Microsoft.Extensions.Hosting;
-using System.Diagnostics.Metrics;
 
 namespace CPC_PROJECT
 {
@@ -19,117 +14,113 @@ namespace CPC_PROJECT
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // קריאת מחרוזת החיבור
-            var connectionString = GetConnectionString(builder.Configuration);
-
-            if (string.IsNullOrEmpty(connectionString))
+            try
             {
-                throw new InvalidOperationException("Connection string not found.");
-            }
+                // קריאת מחרוזת החיבור
+                var connectionString = GetConnectionString(builder.Configuration);
 
-            Console.WriteLine($"Connecting to database... Environment: {builder.Environment.EnvironmentName}");
-
-            // רישום DbContext - רק PostgreSQL
-            builder.Services.AddDbContext<dbcontext>(options =>
-            {
-                options.UseNpgsql(connectionString, npgsqlOptions =>
+                if (string.IsNullOrEmpty(connectionString))
                 {
-                    npgsqlOptions.CommandTimeout(30);
-                    npgsqlOptions.EnableRetryOnFailure(3);
-                });
-
-                if (builder.Environment.IsDevelopment())
-                {
-                    options.EnableSensitiveDataLogging();
-                    options.EnableDetailedErrors();
+                    throw new InvalidOperationException("Connection string not found.");
                 }
-            });
 
-            // רישום Services
-            builder.Services.AddScoped<IDal, DalManager>();
-            builder.Services.AddScoped<IBL, BLManager>();
+                Console.WriteLine($"Environment: {builder.Environment.EnvironmentName}");
+                Console.WriteLine($"Connection string configured: {!string.IsNullOrEmpty(connectionString)}");
 
-            builder.Services.AddControllers();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
-            // CORS - Enhanced configuration
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAll", policy =>
+                // רישום DbContext - רק PostgreSQL
+                builder.Services.AddDbContext<dbcontext>(options =>
                 {
-                    policy.AllowAnyOrigin()
-                          .AllowAnyMethod()
-                          .AllowAnyHeader()
-                          .WithExposedHeaders("*");
+                    options.UseNpgsql(connectionString, npgsqlOptions =>
+                    {
+                        npgsqlOptions.CommandTimeout(60);
+                        npgsqlOptions.EnableRetryOnFailure(
+                            maxRetryCount: 3,
+                            maxRetryDelay: TimeSpan.FromSeconds(5),
+                            errorCodesToAdd: null);
+                    });
+
+                    // Only enable detailed logging in development
+                    if (builder.Environment.IsDevelopment())
+                    {
+                        options.EnableSensitiveDataLogging();
+                        options.EnableDetailedErrors();
+                    }
+                }, ServiceLifetime.Scoped);
+
+                // רישום Services
+                builder.Services.AddScoped<IDal, DalManager>();
+                builder.Services.AddScoped<IBL, BLManager>();
+
+                builder.Services.AddControllers();
+                builder.Services.AddEndpointsApiExplorer();
+                builder.Services.AddSwaggerGen();
+
+                // CORS configuration
+                builder.Services.AddCors(options =>
+                {
+                    options.AddPolicy("AllowAll", policy =>
+                    {
+                        policy.AllowAnyOrigin()
+                              .AllowAnyMethod()
+                              .AllowAnyHeader();
+                    });
                 });
 
-                // Alternative specific policy for production
-                options.AddPolicy("Production", policy =>
-                {
-                    policy.WithOrigins(
-                        "https://myprojectfrontend1.onrender.com",
-                        "http://localhost:3000",
-                        "http://localhost:5173",
-                        "http://localhost:4200"
-                    )
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials();
-                });
-            });
-
-            // Configure URLs based on environment
-            if (builder.Environment.IsDevelopment())
-            {
-                builder.WebHost.UseUrls("https://localhost:7064", "http://localhost:5298");
-            }
-            else
-            {
+                // Configure URLs
                 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-                builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
-            }
-
-            var app = builder.Build();
-
-            // CORS must be before other middleware
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseCors("AllowAll");
-            }
-            else
-            {
-                // Use both policies in production for maximum compatibility
-                app.UseCors("AllowAll");
-            }
-
-            // Only use static files if wwwroot exists
-            if (Directory.Exists(Path.Combine(app.Environment.ContentRootPath, "wwwroot")))
-            {
-                app.UseStaticFiles();
-            }
-
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
+                if (!builder.Environment.IsDevelopment())
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                    c.RoutePrefix = string.Empty;
-                });
-                app.UseHttpsRedirection();
+                    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+                }
+
+                var app = builder.Build();
+
+                // Configure middleware pipeline
+                app.UseCors("AllowAll");
+
+                if (app.Environment.IsDevelopment())
+                {
+                    app.UseDeveloperExceptionPage();
+                    app.UseSwagger();
+                    app.UseSwaggerUI(c =>
+                    {
+                        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                        c.RoutePrefix = string.Empty;
+                    });
+                    app.UseHttpsRedirection();
+                }
+                else
+                {
+                    // Add global exception handling for production
+                    app.UseExceptionHandler("/Error");
+                }
+
+                app.UseRouting();
+                app.UseAuthorization();
+                app.MapControllers();
+
+                // Add a health check endpoint
+                app.MapGet("/health", () => Results.Ok(new { 
+                    status = "healthy", 
+                    timestamp = DateTime.UtcNow,
+                    environment = app.Environment.EnvironmentName
+                }));
+
+                // Test database connection before starting
+                await TestDatabaseConnection(app);
+
+                // Run migrations
+                await RunMigrationsAsync(app);
+
+                Console.WriteLine($"Application starting on port {port}");
+                app.Run();
             }
-
-            // Important: UseRouting must come before UseAuthorization
-            app.UseRouting();
-            app.UseAuthorization();
-            app.MapControllers();
-
-            // הרצת migrations
-            RunMigrations(app);
-
-            app.Run();
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Application failed to start: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
+                throw;
+            }
         }
 
         private static string GetConnectionString(IConfiguration configuration)
@@ -138,10 +129,13 @@ namespace CPC_PROJECT
             
             if (!string.IsNullOrEmpty(databaseUrl))
             {
+                Console.WriteLine("Using DATABASE_URL from environment");
                 return ConvertPostgreSQLUrl(databaseUrl);
             }
 
-            return configuration.GetConnectionString("DefaultConnection");
+            var connString = configuration.GetConnectionString("DefaultConnection");
+            Console.WriteLine("Using DefaultConnection from appsettings");
+            return connString;
         }
 
         private static string ConvertPostgreSQLUrl(string databaseUrl)
@@ -151,7 +145,7 @@ namespace CPC_PROJECT
                 var uri = new Uri(databaseUrl);
                 var userInfo = uri.UserInfo.Split(':');
                 
-                return $"Host={uri.Host};Port={uri.Port};Database={uri.LocalPath.Substring(1)};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true;Timeout=30;Command Timeout=30";
+                return $"Host={uri.Host};Port={uri.Port};Database={uri.LocalPath.Substring(1)};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true;Timeout=60;Command Timeout=60;Pooling=true;MinPoolSize=1;MaxPoolSize=20;";
             }
             catch (Exception ex)
             {
@@ -159,7 +153,34 @@ namespace CPC_PROJECT
             }
         }
 
-        private static void RunMigrations(WebApplication app)
+        private static async Task TestDatabaseConnection(WebApplication app)
+        {
+            using var scope = app.Services.CreateScope();
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+            
+            try
+            {
+                var context = scope.ServiceProvider.GetRequiredService<dbcontext>();
+                logger.LogInformation("Testing database connection...");
+                
+                var canConnect = await context.Database.CanConnectAsync();
+                if (canConnect)
+                {
+                    logger.LogInformation("Database connection successful");
+                }
+                else
+                {
+                    logger.LogWarning("Cannot connect to database");
+                }
+            }
+            catch (Exception ex)
+            {
+                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+                logger.LogError(ex, "Database connection test failed: {Error}", ex.Message);
+            }
+        }
+
+        private static async Task RunMigrationsAsync(WebApplication app)
         {
             using var scope = app.Services.CreateScope();
             var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
@@ -168,23 +189,15 @@ namespace CPC_PROJECT
             {
                 var context = scope.ServiceProvider.GetRequiredService<dbcontext>();
                 
-                logger.LogInformation("Testing database connection...");
-                
-                if (context.Database.CanConnect())
-                {
-                    logger.LogInformation("Database connection successful. Starting migration...");
-                    context.Database.Migrate();
-                    logger.LogInformation("Database migration completed successfully.");
-                }
-                else
-                {
-                    logger.LogWarning("Cannot connect to database. Skipping migration.");
-                }
+                logger.LogInformation("Starting database migration...");
+                await context.Database.MigrateAsync();
+                logger.LogInformation("Database migration completed successfully");
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Database migration failed: {Error}", ex.Message);
                 
+                // Don't throw in production - let the app start even if migrations fail
                 if (app.Environment.IsDevelopment())
                 {
                     throw;
