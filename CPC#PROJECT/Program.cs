@@ -66,12 +66,12 @@
 //                     });
 //                 });
 
-//                 // Configure URLs
+//                 // Configure URLs - חשוב מאוד ל-Render
 //                 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-//                 if (!builder.Environment.IsDevelopment())
-//                 {
-//                     builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
-//                 }
+//                 Console.WriteLine($"Configuring to listen on port: {port}");
+
+//                 // ב-Render תמיד צריך להאזין על 0.0.0.0
+//                 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
 //                 var app = builder.Build();
 
@@ -274,12 +274,12 @@ namespace CPC_PROJECT
                     });
                 });
 
-                // Configure URLs
+                // Configure URLs - חשוב מאוד ל-Render
                 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-                if (!builder.Environment.IsDevelopment())
-                {
-                    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
-                }
+                Console.WriteLine($"Configuring to listen on port: {port}");
+
+                // ב-Render תמיד צריך להאזין על 0.0.0.0
+                builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
                 var app = builder.Build();
 
@@ -307,12 +307,16 @@ namespace CPC_PROJECT
                 app.UseAuthorization();
                 app.MapControllers();
 
-                // Add a health check endpoint
+                // Add a simple root endpoint
+                app.MapGet("/", () => "API is running!");
+
+                // Improve health check
                 app.MapGet("/health", () => Results.Ok(new
                 {
                     status = "healthy",
                     timestamp = DateTime.UtcNow,
-                    environment = app.Environment.EnvironmentName
+                    environment = app.Environment.EnvironmentName,
+                    port = Environment.GetEnvironmentVariable("PORT")
                 }));
 
                 // Test database connection before starting
@@ -464,9 +468,11 @@ namespace CPC_PROJECT
 
                     context.Customers.AddRange(customers);
                     await context.SaveChangesAsync();
-
-                    logger.LogInformation("Database seeding completed successfully");
+                    logger.LogInformation("Customers seeded successfully");
                 }
+
+
+
                 if (!context.Employees.Any())
                 {
                     var employees = new List<Employee>
@@ -475,18 +481,26 @@ namespace CPC_PROJECT
                 {
                     EmpId = 1,
                     EmpNum = 1001,
-                    Ename = "Manager",
-                    Egmail = "john.manager@company.com",
-                    Ephone = "050-1111111"
+
+
+
+                    Ename = "Manager", // 7 תווים - צריך להיות בסדר
+                    Egmail = "mgr@co.com", // קצר יותר
+                    Ephone = "0501111111" // 10 תווים
                 },
                 new Employee
                 {
                     EmpId = 4545,
                     EmpNum = 1002,
-                    Ename = "moshe",
-                    Egmail = "moshe.worker@company.com",
-                    Ephone = "050-2222222"
-                } };
+
+
+
+
+                    Ename = "moshe", // 5 תווים
+                    Egmail = "m@co.com", // קצר יותר
+                    Ephone = "0502222222" // 10 תווים
+                }
+            };
 
                     context.Employees.AddRange(employees);
                     await context.SaveChangesAsync();
@@ -501,6 +515,7 @@ namespace CPC_PROJECT
             catch (Exception ex)
             {
                 logger.LogError(ex, "Database seeding failed: {Error}", ex.Message);
+                // אל תזרוק שגיאה - תן לאפליקציה להמשיך לרוץ
             }
         }
 
