@@ -285,7 +285,7 @@ namespace CPC_PROJECT
 
                 // Configure middleware pipeline
                 app.UseCors("AllowAll");
-
+app.UseStaticFiles();
                 if (app.Environment.IsDevelopment())
                 {
                     app.UseDeveloperExceptionPage();
@@ -325,7 +325,7 @@ namespace CPC_PROJECT
                 // Run migrations
                 await RunMigrationsAsync(app);
                 // Seed database with initial data
-                await SeedDatabaseAsync(app);
+                //await SeedDatabaseAsync(app);
                 Console.WriteLine($"Application starting on port {port}");
                 app.Run();
             }
@@ -438,86 +438,87 @@ namespace CPC_PROJECT
             }
         }
 
-        static async Task SeedDatabaseAsync(WebApplication app)
-        {
-            using var scope = app.Services.CreateScope();
-            var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
-            try
-            {
-                var context = scope.ServiceProvider.GetRequiredService<dbcontext>();
+        //        static async Task SeedDatabaseAsync(WebApplication app)
+        //        {
+        //            using var scope = app.Services.CreateScope();
+        //            var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
-                logger.LogInformation("Starting database seeding...");
+        //            try
+        //            {
+        //                var context = scope.ServiceProvider.GetRequiredService<dbcontext>();
 
-                // בדיקה אם כבר יש נתונים
-                if (!context.Customers.Any())
-                {
-                    var customers = new List<Customer>
-            {
+        //                logger.LogInformation("Starting database seeding...");
 
-                new Customer
-                {
-                    CustId = 12345,
-                    CustNum = 1,
-                    CustName = "jonatan",
-                    CustAddress = "ירמיהו 3",
-                    CustEmail = "jjjjjjjjjjjj",
-                    CustPhone = "0556750905"
-                }
-            };
+        //                // בדיקה אם כבר יש נתונים
+        //                if (!context.Customers.Any())
+        //                {
+        //                    var customers = new List<Customer>
+        //            {
 
-                    context.Customers.AddRange(customers);
-                    await context.SaveChangesAsync();
-                    logger.LogInformation("Customers seeded successfully");
-                }
+        //                new Customer
+        //                {
+        //                    CustId = 12345,
+        //                    CustNum = 1,
+        //                    CustName = "jonatan",
+        //                    CustAddress = "ירמיהו 3",
+        //                    CustEmail = "jjjjjjjjjjjj",
+        //                    CustPhone = "0556750905"
+        //                }
+        //            };
 
-
-
-                if (!context.Employees.Any())
-                {
-                    var employees = new List<Employee>
-            {
-                new Employee
-                {
-                    EmpId = 1,
-                    EmpNum = 1001,
+        //                    context.Customers.AddRange(customers);
+        //                    await context.SaveChangesAsync();
+        //                    logger.LogInformation("Customers seeded successfully");
+        //                }
 
 
 
-                    Ename = "Manager", // 7 תווים - צריך להיות בסדר
-                    Egmail = "mgr@co.com", // קצר יותר
-                    Ephone = "0501111111" // 10 תווים
-                },
-                new Employee
-                {
-                    EmpId = 4545,
-                    EmpNum = 1002,
+        //                if (!context.Employees.Any())
+        //                {
+        //                    var employees = new List<Employee>
+        //            {
+        //                new Employee
+        //                {
+        //                    EmpId = 1,
+        //                    EmpNum = 1001,
+
+
+
+        //                    Ename = "Manager", // 7 תווים - צריך להיות בסדר
+        //                    Egmail = "mgr@co.com", 
+        //                    Ephone = "0501111111" 
+        //                },
+        //                new Employee
+        //                {
+        //                    EmpId = 4545,
+        //                    EmpNum = 1002,
 
 
 
 
-                    Ename = "moshe", // 5 תווים
-                    Egmail = "m@co.com", // קצר יותר
-                    Ephone = "0502222222" // 10 תווים
-                }
-            };
+        //                    Ename = "moshe", // 5 תווים
+        //                    Egmail = "m@co.com", // קצר יותר
+        //                    Ephone = "0502222222" // 10 תווים
+        //                }
+        //            };
 
-                    context.Employees.AddRange(employees);
-                    await context.SaveChangesAsync();
-                    logger.LogInformation("Employees seeded successfully");
-                }
+        //                    context.Employees.AddRange(employees);
+        //                    await context.SaveChangesAsync();
+        //                    logger.LogInformation("Employees seeded successfully");
+        //                }
 
-                else
-                {
-                    logger.LogInformation("Database already contains data, skipping seeding");
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "Database seeding failed: {Error}", ex.Message);
-                // אל תזרוק שגיאה - תן לאפליקציה להמשיך לרוץ
-            }
-        }
+        //                else
+        //                {
+        //                    logger.LogInformation("Database already contains data, skipping seeding");
+        //                }
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                logger.LogError(ex, "Database seeding failed: {Error}", ex.Message);
+        //                // אל תזרוק שגיאה - תן לאפליקציה להמשיך לרוץ
+        //            }
+        //        }
 
     }
 
