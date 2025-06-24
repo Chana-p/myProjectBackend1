@@ -19,18 +19,8 @@ namespace CPC_PROJECT.Controllers
         {
             return Ok(orders.Get()); //new List<string>() { "sara", "shira", "bracha" };  
         }
-<<<<<<< HEAD
-        // להחזיר רשימת כל ההזמנות
-        [HttpDelete("DeleteAll")]
-        public void Delete()
-        {
-             orders.DeleteAll(); //new List<string>() { "sara", "shira", "bracha" };  
-        }
-=======
 
-      
 
->>>>>>> origin/main
         // להחזיר רשימת כל ההזמנות
         [HttpGet("GetByCustomer/{id}")]
         public IActionResult GetByCustomer(int id)
@@ -42,13 +32,7 @@ namespace CPC_PROJECT.Controllers
         {
             return Ok(orders.GetForEmployee(id));
         }
-<<<<<<< HEAD
-        //add
-        [HttpPost("addToCustomer/{id}")]
-        public IActionResult Add(int id, [FromBody] List<BLOrderDetail> list)
-        {
-            int a = orders.Add(id);
-=======
+
 
         [HttpGet("GetCompletedByEmployee/{id}")]
         public IActionResult GetCompletedByemp(int id)
@@ -66,27 +50,11 @@ namespace CPC_PROJECT.Controllers
         {
             int a = orders.Add(id,empId);
 
->>>>>>> origin/main
+
             return Ok(orders.addDetails(list, a));
 
         }
         //update
-<<<<<<< HEAD
-        [HttpPut("updateSending/{orderId}")]
-        public void updateSending(int orderId)
-        {
-            
-             orders.UpdateSending(orderId);
-
-        }
-
-        //public IActionResult add(int id, [FromBody]List<BLOrderDetail>list)
-        //{
-        //  int a=orders.Add(id);
-        //  return Ok(orders.addDetails(list,a));
-
-        //}
-=======
 
         [HttpPut("updateSending/{orderId}/{empId}")]
         public void updateSending(int orderId, int empId)
@@ -104,7 +72,7 @@ namespace CPC_PROJECT.Controllers
         }
 
 
->>>>>>> origin/main
+
 
 
 

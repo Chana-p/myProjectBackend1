@@ -6,13 +6,11 @@ namespace Dal.newModels;
 
 public partial class dbcontext : DbContext
 {
-<<<<<<< HEAD
+
     public dbcontext()
     {
     }
-=======
-  
->>>>>>> origin/main
+
 
     public dbcontext(DbContextOptions<dbcontext> options)
         : base(options)
@@ -31,15 +29,10 @@ public partial class dbcontext : DbContext
 
     public virtual DbSet<Table> Tables { get; set; }
 
-<<<<<<< HEAD
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\c#\\CPC#PROJECT\\data2\\dbProject.mdf;Integrated Security=True;Connect Timeout=30");
-=======
-//     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//         => optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\user\\Desktop\\חני\\מה שיש בגיטהאב\\data\\dbProject.mdf\";Integrated Security=True;Connect Timeout=30");
->>>>>>> origin/main
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

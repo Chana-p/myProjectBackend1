@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-﻿using BL.Api;
-using BL.Models;
-using Dal.Api;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-=======
 ﻿// using BL.Api;
 // using BL.Models;
 // using Dal.Api;
@@ -94,22 +87,13 @@ using BL.Api;
 using BL.Models;
 using Dal.Api;
 using Microsoft.AspNetCore.Mvc;
->>>>>>> origin/main
 using System.Collections.Generic;
 
 namespace CPC_PROJECT.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-<<<<<<< HEAD
-    public class CustomerController:ControllerBase
-    {
-        IBLCustomer customers;// = new BlPatientService();
-        public CustomerController(IBL manager)
-        {
-            customers = manager.Customers;// כאן קבלנו אוביקט שהוא שרות של פצינטים
-        }
-=======
+
     public class CustomerController : ControllerBase
     {
         private readonly IBLCustomer customers;
@@ -123,37 +107,12 @@ namespace CPC_PROJECT.Controllers
             _logger = logger;
         }
 
->>>>>>> origin/main
+
         // להחזיר רשימת לקוחות
         [HttpGet("GetAll")]
         public List<BLCustomer> Get()
         {
-<<<<<<< HEAD
-            return customers.Get(); //new List<string>() { "sara", "shira", "bracha" };  
-        }
-        //logIn
-        [HttpGet("logIn/{id}/{name}")]
-        public IActionResult LogIn(int id,string name)
-        {
-         return Ok( customers.GetById(id,name));
-           
-        }
-        //logOn
-        [HttpPost("logOn")]
-        public IActionResult Create([FromBody]BLCustomer newCustomer)
-        {
-          return Ok( customers.Create(newCustomer));
-       
-        }
-        //update
-        [HttpPost("update")]
-        public IActionResult Update([FromBody] BLCustomer newCustomer)
-        {
-            return Ok(customers.Update(newCustomer));
 
-        }
-
-=======
             try
             {
                 _logger.LogInformation("Getting all customers");
@@ -249,6 +208,6 @@ namespace CPC_PROJECT.Controllers
                 });
             }
         }
->>>>>>> origin/main
+
     }
 }

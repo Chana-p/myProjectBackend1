@@ -12,11 +12,7 @@ namespace Dal.Api
         List<Employee> getAll();
         Employee getByName(string name);
         Employee getByID(int id);
-<<<<<<< HEAD
-        Employee AvailableEmployee();
-=======
-     //   Employee AvailableEmployee();
->>>>>>> origin/main
+
         void Add(Employee e);
         void Delete(Employee e);
     }

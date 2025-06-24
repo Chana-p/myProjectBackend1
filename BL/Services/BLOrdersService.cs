@@ -18,39 +18,18 @@ namespace BL.Services
         {
             this.Dal = dal;
         }
-
-<<<<<<< HEAD
-        public int Add(int custId)
-        {
-            DateTime dt=DateTime.Now;
-            Console.WriteLine("DateTime in Normal format: ");
-            string sqlFormattedDate=dt.ToString("yyyy-MM-dd HH:mm:ss");
-            Console.WriteLine("DateTime in SQL format: ");
-            
-                        Order o = new()
-=======
-
         public int Add(int custId, int? empId)
         {
             Order o = new()
-
->>>>>>> origin/main
             {
-                
-                OrderDate= DateOnly.FromDateTime(DateTime.Today).ToShortDateString(),
+                OrderDate = DateOnly.FromDateTime(DateTime.Today).ToShortDateString(),
                 CustId = custId,
-<<<<<<< HEAD
-                EmpId = Dal.Employees.AvailableEmployee().EmpId,
-                //PaymentType = bLOrder.PaymentType,
-=======
-
-                EmpId = empId==0?empId:null,
-
->>>>>>> origin/main
+                EmpId = empId ?? 0, // Fix for CS8629: Use null-coalescing operator to handle nullable value type
                 Sent = false
             };
-           return  Dal.Orders.Create(o);
+            return Dal.Orders.Create(o);
         }
+        
 
         public List<BLOrder> addDetails(List<BLOrderDetail> list,int orderId)
         {
@@ -63,12 +42,10 @@ namespace BL.Services
                     ProdId=item.ProdId,
                     Count=item.Count
                 };
-<<<<<<< HEAD
-=======
 
                 Dal.Products.UpdateSum(item.ProdId, item.Count);
 
->>>>>>> origin/main
+
                 dalList.Add(od);
             }
             Dal.OrderDetail.addDetailsForOrder(dalList);
@@ -87,34 +64,22 @@ namespace BL.Services
 
         public List<BLOrder> Get()
         {
-<<<<<<< HEAD
-         List<Order>  dallist=Dal.Orders.Get();
-         List<BLOrder>  bllist=new();
-
-            foreach (var item in dallist)
-            {
-               string email= Dal.Employees.getByID(item.EmpId).Egmail;
-               string name= Dal.Employees.getByID(item.EmpId).Ename;
-                bllist.Add(new BLOrder(item,email,name));
-=======
-
             List<Order> dallist = Dal.Orders.Get();
             List<BLOrder> bllist = new();
 
             foreach (var item in dallist)
             {
-                string email = null;
-                string name = null;
+                string? email = null; // Fix CS8600: Use nullable type for email
+                string? name = null;  // Fix CS8600: Use nullable type for name
 
-                if (item.EmpId.HasValue) // Check if EmpId has a value
+                if (item.EmpId != 0) // Fix: Check if EmpId is not zero instead of using HasValue  
                 {
-                    email = Dal.Employees.getByID(item.EmpId.Value).Egmail; // Use .Value to access the int value
-                    name = Dal.Employees.getByID(item.EmpId.Value).Ename;
+                    var employee = Dal.Employees.getByID(item.EmpId); // Ensure employee is fetched only once
+                    email = employee?.Egmail; // Use null-conditional operator to avoid null reference
+                    name = employee?.Ename;  // Use null-conditional operator to avoid null reference
                 }
 
                 bllist.Add(new BLOrder(item, email, name));
-
->>>>>>> origin/main
             }
             return bllist;
         }
@@ -123,30 +88,19 @@ namespace BL.Services
         {
             List<Order> dallist = Dal.Orders.GetForCustomer(custId);
             List<BLOrder> bllist = new();
-<<<<<<< HEAD
-            
-            foreach (var item in dallist)
-            {
-                string email = Dal.Employees.getByID(item.EmpId).Egmail;
-                string name = Dal.Employees.getByID(item.EmpId).Ename;
-                bllist.Add(new BLOrder(item,email,name));
-=======
-
 
             foreach (var item in dallist)
             {
                 string email = null;
                 string name = null;
 
-                if (item.EmpId.HasValue) // Check if EmpId has a value
+                if (item.EmpId != 0) // Fix: Check if EmpId is not zero instead of using HasValue  
                 {
-                    email = Dal.Employees.getByID(item.EmpId.Value).Egmail; // Use .Value to access the int value
-                    name = Dal.Employees.getByID(item.EmpId.Value).Ename;
+                    email = Dal.Employees.getByID(item.EmpId).Egmail;
+                    name = Dal.Employees.getByID(item.EmpId).Ename;
                 }
 
                 bllist.Add(new BLOrder(item, email, name));
-
->>>>>>> origin/main
             }
             return bllist;
         }
@@ -158,26 +112,6 @@ namespace BL.Services
 
             foreach (var item in dallist)
             {
-<<<<<<< HEAD
-                string email = Dal.Customers.Get().ToList().Find(cust=>cust.CustId==item.CustId).CustEmail;
-                string name = Dal.Customers.Get().ToList().Find(cust => cust.CustId == item.CustId).CustName;
-                bllist.Add(new BLOrder(item, email, name));
-            }
-            return bllist;
-        }
-        
-        public List<BLOrder> GetNews()
-        {
-            throw new NotImplementedException();
-        }
-        //the employee update about  sending the order
-        public void UpdateSending(int orderId)
-        {
-            Dal.Orders.UpdateSending(orderId);
-            //List<OrderDetail> sendingProducts = Dal.Orders.Get().ToList().Find(p => p.OrderId == orderId).orderdetails;
-            //Dal.Products.UpdateAmount(prodId);
-        }
-=======
 
                 if (!(bool)item.Sent)
                 {
@@ -239,8 +173,6 @@ namespace BL.Services
             });
         }
 
-       
-
->>>>>>> origin/main
+  
     }
 }
