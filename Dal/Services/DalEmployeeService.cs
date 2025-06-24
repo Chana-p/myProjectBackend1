@@ -22,10 +22,20 @@ namespace Dal.Services
             Dal.SaveChanges();
         }
 
+<<<<<<< HEAD
         public Employee AvailableEmployee()
         {
             return Dal.Employees.ToList()[0];
         }
+=======
+
+        //public Employee AvailableEmployee()
+        //{
+        //    return Dal.Employees.ToList()[0];
+        //}
+
+      
+>>>>>>> origin/main
 
         public void Delete(Employee e)
         {

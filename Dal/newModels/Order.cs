@@ -11,7 +11,13 @@ public partial class Order
 
     public int CustId { get; set; }
 
+<<<<<<< HEAD
     public int EmpId { get; set; }
+=======
+
+    public int? EmpId { get; set; }
+
+>>>>>>> origin/main
 
     public string? PaymentType { get; set; }
 

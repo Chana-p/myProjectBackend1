@@ -11,6 +11,7 @@ namespace Dal.Api
     {
 
         List<Order> Get();
+<<<<<<< HEAD
         List<Order> GetNews();
         List<Order> GetForCustomer(int custId);
         List<Order> GetForEmployee(int empId);
@@ -19,6 +20,15 @@ namespace Dal.Api
         int Create(Order o);
         void Delete();
         void UpdateSending(int orderId);
+=======
+        List<Order> GetForCustomer(int custId);
+        List<Order> GetForEmployee(int empId);
+
+        int Create(Order o);
+        void Delete();
+        void UpdateSending(int orderId,int empId);
+        void AssignOrdersToEmp(int empId,int ordId);
+>>>>>>> origin/main
 
 
     }

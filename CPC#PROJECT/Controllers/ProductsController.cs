@@ -30,6 +30,7 @@ namespace CPC_PROJECT.Controllers
            // await UploadFile(productPicture);
             return products.Add(p);
         }
+<<<<<<< HEAD
         [HttpPost("AddFile")]
         public async Task<IActionResult> UploadFile(IFormFile file)
         {
@@ -64,6 +65,8 @@ namespace CPC_PROJECT.Controllers
 
             return Ok(new { filePath = $"/{(file.ContentType.StartsWith("image/") ? "IMG" : "FILES")}/{uniqueFileName}" });
         }
+=======
+>>>>>>> origin/main
 
         [HttpPut("Update")]
         public List<BLProduct> Update(BLProduct p)
