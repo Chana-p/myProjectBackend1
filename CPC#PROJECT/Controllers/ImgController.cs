@@ -1,60 +1,64 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿  using Microsoft.AspNetCore.Mvc;
 
 namespace CPC_PROJECT.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     [ApiController]
     public class ImgController : ControllerBase
     {
+        private readonly IWebHostEnvironment _environment;
+
+        public ImgController(IWebHostEnvironment environment)
+        {
+            _environment = environment;
+        }
+
         [HttpPost("upload")]
         public async Task<IActionResult> UploadFile(IFormFile file)
         {
-            if (file == null || file.Length == 0)
-                return BadRequest("No file uploaded."); // לא שונה
-
-            var uploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-            var uniqueFileName = Guid.NewGuid().ToString().Substring(0, 8) + Path.GetExtension(file.FileName);
-
-            string folderPath;
-
-            if (file.ContentType.StartsWith("image/"))
-            {
-                folderPath = Path.Combine(uploads, "IMG");
-            }
-            else
-            {
-                folderPath = Path.Combine(uploads, "FILES");
-            }
-
-            // שינוי: הוספת בדיקה אם התיקייה הראשית wwwroot קיימת
-            if (!Directory.Exists(uploads))
-            {
-                Directory.CreateDirectory(uploads); // יצירת תיקיית wwwroot אם אינה קיימת
-            }
-
-            if (!Directory.Exists(folderPath))
-            {
-                Directory.CreateDirectory(folderPath); // לא שונה
-            }
-
-            var filePath = Path.Combine(folderPath, uniqueFileName);
-
             try
             {
+                if (file == null || file.Length == 0)
+                    return BadRequest(new { message = "לא נבחר קובץ" });
+
+                // בדיקת סוג קובץ
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+                
+                if (!allowedExtensions.Contains(fileExtension))
+                    return BadRequest(new { message = "סוג קובץ לא תקין" });
+
+                // יצירת שם קובץ ייחודי
+                var fileName = Guid.NewGuid().ToString() + fileExtension;
+                
+                // יצירת תיקיית uploads אם לא קיימת
+                var uploadsPath = Path.Combine(_environment.WebRootPath ?? _environment.ContentRootPath, "IMG");
+                if (!Directory.Exists(uploadsPath))
+                    Directory.CreateDirectory(uploadsPath);
+
+                var filePath = Path.Combine(uploadsPath, fileName);
+
+                // שמירת הקובץ
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    await file.CopyToAsync(stream); // לא שונה
+                    await file.CopyToAsync(stream);
                 }
+
+                // החזרת URL לגישה לתמונה
+                var imageUrl = $"/IMG/{fileName}";
+                
+                // return Ok(new { 
+                //     message = "התמונה הועלתה בהצלחה", 
+                //     imageUrl = imageUrl,
+                //     fileName = fileName 
+                // });
+                return Ok(new { imageUrl }); 
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}"); // שינוי: טיפול בשגיאות בעת כתיבת הקובץ
+                return StatusCode(500, new { message = "שגיאה בהעלאת התמונה", error = ex.Message });
             }
-
-            return Ok(new { imageUrl = $"{uniqueFileName}" }); // לא שונה
         }
     }
 }
-
-
