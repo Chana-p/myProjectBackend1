@@ -79,6 +79,11 @@ namespace CPC_PROJECT
                 // ב-Render תמיד צריך להאזין על 0.0.0.0
                 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
+                builder.Services.Configure<FormOptions>(options =>
+                {
+                    options.MultipartBodyLengthLimit = 10 * 1024 * 1024; // 10MB limit
+                });
+
                 var app = builder.Build();
 
                 // Configure middleware pipeline
@@ -100,6 +105,17 @@ namespace CPC_PROJECT
                     // Add global exception handling for production
                     app.UseExceptionHandler("/Error");
                 }
+
+                // Enable static files middleware
+                app.UseStaticFiles();
+
+                // Optional: Configure custom static file path for uploads
+                app.UseStaticFiles(new StaticFileOptions
+                {
+                    FileProvider = new PhysicalFileProvider(
+                        Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
+                    RequestPath = "/uploads"
+                });
 
                 app.UseRouting();
                 app.UseAuthorization();

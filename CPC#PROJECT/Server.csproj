@@ -7,6 +7,8 @@
     <RootNamespace>CPC_PROJECT</RootNamespace>
   </PropertyGroup>
 
+  <!-- wwwroot נכלל אוטומטית ב-Web SDK -->
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.13">
       <PrivateAssets>all</PrivateAssets>
