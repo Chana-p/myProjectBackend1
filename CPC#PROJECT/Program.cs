@@ -14,11 +14,7 @@ namespace CPC_PROJECT
 
         public static async Task Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(new WebApplicationOptions
-{
-    Args = args,
-    ContentRootPath = Directory.GetCurrentDirectory()
-});
+            var builder = WebApplication.CreateBuilder(args);
 
             try
             {
