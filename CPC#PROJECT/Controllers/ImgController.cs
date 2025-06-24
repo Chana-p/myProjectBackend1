@@ -2,7 +2,7 @@
 
 namespace CPC_PROJECT.Controllers
 {
-    [ApiController]
+   
     [Route("api/[controller]")]
     [ApiController]
     public class ImgController : ControllerBase
