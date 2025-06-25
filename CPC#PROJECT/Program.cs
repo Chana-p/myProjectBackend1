@@ -136,9 +136,8 @@ namespace CPC_PROJECT
                 // Run migrations
                 try 
                 {
-
-                    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-                    if (!string.IsNullOrEmpty(connectionString))
+                    var dbConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+                    if (!string.IsNullOrEmpty(dbConnectionString))
                     {
                         await RunMigrationsAsync(app);
                     }

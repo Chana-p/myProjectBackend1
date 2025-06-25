@@ -9,21 +9,61 @@
                   [ApiController]
                   public class ImgController : ControllerBase
                   {
-                      private readonly IConfiguration _configuration;
+                      private readonly Cloudinary _cloudinary;
 
                       public ImgController(IConfiguration configuration)
                       {
-                          _configuration = configuration;
+                          var cloudName = configuration["Cloudinary:CloudName"];
+                          var apiKey = configuration["Cloudinary:ApiKey"];
+                          var apiSecret = configuration["Cloudinary:ApiSecret"];
+
+                          var account = new Account(cloudName, apiKey, apiSecret);
+                          _cloudinary = new Cloudinary(account);
                       }
 
                       [HttpPost("upload")]
                       public async Task<IActionResult> UploadFile(IFormFile file)
                       {
-                          // בינתיים נחזיר הודעה שהשירות לא זמין
-                          return Ok(new { 
-                              message = "Upload service will be available after Cloudinary configuration",
-                              received = file?.FileName ?? "No file"
-                          });
+                          try
+                          {
+                              if (file == null || file.Length == 0)
+                                  return BadRequest(new { message = "לא נבחר קובץ" });
+
+                              // בדיקת סוג קובץ
+                              var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
+                              var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+                              
+                              if (!allowedExtensions.Contains(fileExtension))
+                                  return BadRequest(new { message = "סוג קובץ לא תקין" });
+
+                              // העלאה ל-Cloudinary
+                              using var stream = file.OpenReadStream();
+                              var uploadParams = new ImageUploadParams()
+                              {
+                                  File = new FileDescription(file.FileName, stream),
+                                  PublicId = $"products/{Guid.NewGuid()}",
+                                  Transformation = new Transformation()
+                                      .Width(800)
+                                      .Height(600)
+                                      .Crop("limit")
+                                      .Quality("auto")
+                                      .FetchFormat("auto")
+                              };
+
+                              var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
+                              if (uploadResult.Error != null)
+                              {
+                                  return StatusCode(500, new { message = "שגיאה בהעלאת התמונה", error = uploadResult.Error.Message });
+                              }
+
+                              // החזרת URL של התמונה
+                              return Ok(new { imageUrl = uploadResult.SecureUrl.ToString() });
+                          }
+                          catch (Exception ex)
+                          {
+                              return StatusCode(500, new { message = "שגיאה בהעלאת התמונה", error = ex.Message });
+                          }
                       }
 
                       [HttpDelete("delete/{publicId}")]
@@ -58,14 +98,7 @@
                       [HttpGet("test")]
                       public IActionResult Test()
                       {
-                          var cloudName = _configuration["Cloudinary:CloudName"];
-                          var apiKey = _configuration["Cloudinary:ApiKey"];
-            
-                          return Ok(new { 
-                              message = "Image controller is working",
-                              cloudinaryConfigured = !string.IsNullOrEmpty(cloudName) && !string.IsNullOrEmpty(apiKey),
-                              cloudName = cloudName ?? "Not configured"
-                          });
+                          return Ok(new { message = "Image controller is working!", timestamp = DateTime.Now });
                       }
                   }
               }
