@@ -32,8 +32,10 @@ namespace CPC_PROJECT.Controllers
                 // יצירת שם קובץ ייחודי
                 var fileName = Guid.NewGuid().ToString() + fileExtension;
                 
-                // יצירת תיקיית uploads אם לא קיימת
-                var uploadsPath = Path.Combine(_environment.WebRootPath ?? _environment.ContentRootPath, "IMG");
+                // שנה את הנתיב ל-wwwroot/images
+                var uploadsPath = Path.Combine(_environment.WebRootPath ?? 
+                    Path.Combine(_environment.ContentRootPath, "wwwroot"), "images");
+                
                 if (!Directory.Exists(uploadsPath))
                     Directory.CreateDirectory(uploadsPath);
 
@@ -45,8 +47,8 @@ namespace CPC_PROJECT.Controllers
                     await file.CopyToAsync(stream);
                 }
 
-                // החזרת URL לגישה לתמונה
-                var imageUrl = $"/IMG/{fileName}";
+                // שנה את ה-URL
+                var imageUrl = $"/images/{fileName}";
                 
                 // return Ok(new { 
                 //     message = "התמונה הועלתה בהצלחה", 
