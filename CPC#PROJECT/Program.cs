@@ -134,7 +134,24 @@ namespace CPC_PROJECT
                 await TestDatabaseConnection(app);
 
                 // Run migrations
-                await RunMigrationsAsync(app);
+                try 
+                {
+
+                    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+                    if (!string.IsNullOrEmpty(connectionString))
+                    {
+                        await RunMigrationsAsync(app);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Skipping database migrations - no connection string");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Skipping database migrations: {ex.Message}");
+                    // ממשיכים להריץ את האפליקציה בלי מסד נתונים
+                }
                 // Seed database with initial data
                 await SeedDatabaseAsync(app);
                 Console.WriteLine($"Application starting on port {port}");

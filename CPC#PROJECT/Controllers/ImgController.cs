@@ -1,66 +1,71 @@
-﻿  using Microsoft.AspNetCore.Mvc;
+﻿              using Microsoft.AspNetCore.Mvc;
+              using CloudinaryDotNet;
+              using CloudinaryDotNet.Actions;
 
-namespace CPC_PROJECT.Controllers
-{
+              namespace CPC_PROJECT.Controllers
+              {
    
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ImgController : ControllerBase
-    {
-        private readonly IWebHostEnvironment _environment;
+                  [Route("api/[controller]")]
+                  [ApiController]
+                  public class ImgController : ControllerBase
+                  {
+                      private readonly IConfiguration _configuration;
 
-        public ImgController(IWebHostEnvironment environment)
-        {
-            _environment = environment;
-        }
+                      public ImgController(IConfiguration configuration)
+                      {
+                          _configuration = configuration;
+                      }
 
-        [HttpPost("upload")]
-        public async Task<IActionResult> UploadFile(IFormFile file)
-        {
-            try
-            {
-                if (file == null || file.Length == 0)
-                    return BadRequest(new { message = "לא נבחר קובץ" });
+                      [HttpPost("upload")]
+                      public async Task<IActionResult> UploadFile(IFormFile file)
+                      {
+                          // בינתיים נחזיר הודעה שהשירות לא זמין
+                          return Ok(new { 
+                              message = "Upload service will be available after Cloudinary configuration",
+                              received = file?.FileName ?? "No file"
+                          });
+                      }
 
-                // בדיקת סוג קובץ
-                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
-                var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+                      [HttpDelete("delete/{publicId}")]
+                      public async Task<IActionResult> DeleteImage(string publicId)
+                      {
+                          try
+                          {
+                              // החלף / ב-_ כי URL encoding
+                              publicId = publicId.Replace("_", "/");
                 
-                if (!allowedExtensions.Contains(fileExtension))
-                    return BadRequest(new { message = "סוג קובץ לא תקין" });
-
-                // יצירת שם קובץ ייחודי
-                var fileName = Guid.NewGuid().ToString() + fileExtension;
+                              var deleteParams = new DeletionParams(publicId);
+                              var result = await _cloudinary.DestroyAsync(deleteParams);
                 
-                // שנה את הנתיב ל-wwwroot/images
-                var uploadsPath = Path.Combine(_environment.WebRootPath ?? 
-                    Path.Combine(_environment.ContentRootPath, "wwwroot"), "images");
-                
-                if (!Directory.Exists(uploadsPath))
-                    Directory.CreateDirectory(uploadsPath);
+                              if (result.Result == "ok")
+                              {
+                                  return Ok(new { message = "התמונה נמחקה בהצלחה" });
+                              }
+                              else
+                              {
+                                  return BadRequest(new { message = "לא ניתן למחוק את התמונה" });
+                              }
+                          }
+                          catch (Exception ex)
+                          {
+                              return StatusCode(500, new { 
+                                  message = "שגיאה במחיקת התמונה", 
+                                  error = ex.Message 
+                              });
+                          }
+                      }
 
-                var filePath = Path.Combine(uploadsPath, fileName);
-
-                // שמירת הקובץ
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
-                }
-
-                // שנה את ה-URL
-                var imageUrl = $"/images/{fileName}";
-                
-                // return Ok(new { 
-                //     message = "התמונה הועלתה בהצלחה", 
-                //     imageUrl = imageUrl,
-                //     fileName = fileName 
-                // });
-                return Ok(new { imageUrl }); 
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = "שגיאה בהעלאת התמונה", error = ex.Message });
-            }
-        }
-    }
-}
+                      [HttpGet("test")]
+                      public IActionResult Test()
+                      {
+                          var cloudName = _configuration["Cloudinary:CloudName"];
+                          var apiKey = _configuration["Cloudinary:ApiKey"];
+            
+                          return Ok(new { 
+                              message = "Image controller is working",
+                              cloudinaryConfigured = !string.IsNullOrEmpty(cloudName) && !string.IsNullOrEmpty(apiKey),
+                              cloudName = cloudName ?? "Not configured"
+                          });
+                      }
+                  }
+              }
