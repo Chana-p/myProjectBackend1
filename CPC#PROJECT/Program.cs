@@ -59,12 +59,12 @@ namespace CPC_PROJECT
                 builder.Services.AddEndpointsApiExplorer();
                 builder.Services.AddSwaggerGen();
 
-                // CORS configuration
+                // הוספת CORS
                 builder.Services.AddCors(options =>
                 {
-                    options.AddPolicy("AllowAll", policy =>
+                    options.AddPolicy("AllowFrontend", policy =>
                     {
-                        policy.AllowAnyOrigin()
+                        policy.WithOrigins("https://myprojectfrontend1.onrender.com")
                               .AllowAnyMethod()
                               .AllowAnyHeader();
                     });
@@ -84,38 +84,37 @@ namespace CPC_PROJECT
 
                 var app = builder.Build();
 
-                // Configure middleware pipeline
-                app.UseCors("AllowAll");
-
+                // Configure the HTTP request pipeline
                 if (app.Environment.IsDevelopment())
                 {
-                    app.UseDeveloperExceptionPage();
                     app.UseSwagger();
-                    app.UseSwaggerUI(c =>
-                    {
-                        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                        c.RoutePrefix = string.Empty;
-                    });
-                    app.UseHttpsRedirection();
-                }
-                else
-                {
-                    // Add global exception handling for production
-                    app.UseExceptionHandler("/Error");
+                    app.UseSwaggerUI();
                 }
 
-                // Enable static files middleware
+                // הפעלת CORS
+                app.UseCors("AllowFrontend");
+
+                // Enable static files
                 app.UseStaticFiles();
 
-                // Optional: Configure custom static file path for uploads
+                // הגדרת נתיב תיקיית התמונות בהתאם לסביבה
+                var imgPath = app.Environment.IsDevelopment() 
+                    ? Path.Combine(app.Environment.WebRootPath ?? app.Environment.ContentRootPath, "IMG")
+                    : "/app/IMG";
+
+                // וידוא שהתיקייה קיימת
+                if (!Directory.Exists(imgPath))
+                {
+                    Directory.CreateDirectory(imgPath);
+                }
+
                 app.UseStaticFiles(new StaticFileOptions
                 {
-                    FileProvider = new PhysicalFileProvider(
-                        Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
-                    RequestPath = "/uploads"
+                    FileProvider = new PhysicalFileProvider(imgPath),
+                    RequestPath = "/IMG"
                 });
 
-                app.UseRouting();
+                app.UseHttpsRedirection();
                 app.UseAuthorization();
                 app.MapControllers();
 
