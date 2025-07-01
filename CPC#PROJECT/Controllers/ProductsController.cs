@@ -29,7 +29,7 @@ namespace CPC_PROJECT.Controllers
             {
                 try 
                 {
-                    var result = await products.Add(p);
+                    var result =  products.Add(p);
                     return result;
                 }
                 catch (Exception ex)
