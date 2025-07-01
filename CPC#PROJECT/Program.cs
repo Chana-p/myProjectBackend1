@@ -229,7 +229,8 @@ namespace CPC_PROJECT
 
                 if (string.IsNullOrEmpty(connectionString))
                 {
-                    throw new InvalidOperationException("Connection string not found.");
+                  Console.WriteLine("No database connection - continuing without database");
+
                 }
 
                 Console.WriteLine($"Environment: {builder.Environment.EnvironmentName}");

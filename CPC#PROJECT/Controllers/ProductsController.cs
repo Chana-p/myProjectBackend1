@@ -24,12 +24,20 @@ namespace CPC_PROJECT.Controllers
         {
             return products.GetByID(id);
         }
-        [HttpPost("Add")]
-        public async Task<List<BLProduct>> Add(BLProduct p)//,IFormFile productPicture
-        {
-           // await UploadFile(productPicture);
-            return products.Add(p);
-        }
+            [HttpPost("Add")]
+            public async Task<List<BLProduct>> Add(BLProduct p)
+            {
+                try 
+                {
+                    var result = await products.Add(p);
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error adding product: {ex.Message}");
+                    throw;
+                }
+            }
 
         [HttpPut("Update")]
         public List<BLProduct> Update(BLProduct p)
