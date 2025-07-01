@@ -23,13 +23,6 @@ namespace Dal.Services
         }
 
 
-        //public Employee AvailableEmployee()
-        //{
-        //    return Dal.Employees.ToList()[0];
-        //}
-
-      
-
         public void Delete(Employee e)
         {
             throw new NotImplementedException();

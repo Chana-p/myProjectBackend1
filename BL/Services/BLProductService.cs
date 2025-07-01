@@ -28,6 +28,7 @@ namespace BL.Services
                 Pimporter =product.Pimporter,
                 Pcompany=product.Pcompany,
                 Pdescription=product.Pdescription,
+
                 Ppicture=product.Ppicture
 
             };
@@ -47,7 +48,7 @@ namespace BL.Services
             foreach (var item in dal.Products.Get())
             {
 
-                if(item.Ppicture.EndsWith(".jpg")&& !item.Ppicture.StartsWith("/IMG"))
+                if(item.Ppicture.EndsWith(".jpg"))
 
                 list.Add(new BLProduct(item));
             }

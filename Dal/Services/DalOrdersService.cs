@@ -66,6 +66,13 @@ namespace Dal.Services
         }
 
 
+        public List<Order> GetNews()
+        {
+            throw new NotImplementedException();
+        }
+
+
+
        
 
         public void UpdateSending(int orderId, int empId)
@@ -76,6 +83,8 @@ namespace Dal.Services
 
             dbcontext.SaveChanges();
         }
+
+       
 
 
 

@@ -93,6 +93,7 @@ namespace CPC_PROJECT.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class CustomerController : ControllerBase
     {
         private readonly IBLCustomer customers;
@@ -106,10 +107,12 @@ namespace CPC_PROJECT.Controllers
             _logger = logger;
         }
 
+
         // להחזיר רשימת לקוחות
         [HttpGet("GetAll")]
         public List<BLCustomer> Get()
         {
+
             try
             {
                 _logger.LogInformation("Getting all customers");
@@ -205,5 +208,6 @@ namespace CPC_PROJECT.Controllers
                 });
             }
         }
+
     }
 }

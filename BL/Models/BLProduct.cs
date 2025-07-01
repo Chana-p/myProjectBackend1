@@ -20,8 +20,10 @@ namespace BL.Models
 
         public string? Pcompany { get; set; }
 
+
         public string Ppicture { get; set; }
        
+
         public string? Pdescription { get; set; }
 
        
@@ -34,9 +36,9 @@ namespace BL.Models
             this.Psum = p.Psum;
             this.Pname = p.Pname;
             this.Pimporter = p.Pimporter;
-
             this.Ppicture =p.Ppicture;
            
+
         }
 
         

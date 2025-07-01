@@ -1,60 +1,104 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿              using Microsoft.AspNetCore.Mvc;
+              using CloudinaryDotNet;
+              using CloudinaryDotNet.Actions;
 
-namespace CPC_PROJECT.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ImgController : ControllerBase
-    {
-        [HttpPost("upload")]
-        public async Task<IActionResult> UploadFile(IFormFile file)
-        {
-            if (file == null || file.Length == 0)
-                return BadRequest("No file uploaded."); // לא שונה
+              namespace CPC_PROJECT.Controllers
+              {
+   
+                  [Route("api/[controller]")]
+                  [ApiController]
+                  public class ImgController : ControllerBase
+                  {
+                      private readonly Cloudinary _cloudinary;
 
-            var uploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-            var uniqueFileName = Guid.NewGuid().ToString().Substring(0, 8) + Path.GetExtension(file.FileName);
+                      public ImgController(IConfiguration configuration)
+                      {
+                          var cloudName = configuration["Cloudinary:CloudName"];
+                          var apiKey = configuration["Cloudinary:ApiKey"];
+                          var apiSecret = configuration["Cloudinary:ApiSecret"];
 
-            string folderPath;
+                          var account = new Account(cloudName, apiKey, apiSecret);
+                          _cloudinary = new Cloudinary(account);
+                      }
 
-            if (file.ContentType.StartsWith("image/"))
-            {
-                folderPath = Path.Combine(uploads, "IMG");
-            }
-            else
-            {
-                folderPath = Path.Combine(uploads, "FILES");
-            }
+                      [HttpPost("upload")]
+                      public async Task<IActionResult> UploadFile(IFormFile file)
+                      {
+                          try
+                          {
+                              if (file == null || file.Length == 0)
+                                  return BadRequest(new { message = "לא נבחר קובץ" });
 
-            // שינוי: הוספת בדיקה אם התיקייה הראשית wwwroot קיימת
-            if (!Directory.Exists(uploads))
-            {
-                Directory.CreateDirectory(uploads); // יצירת תיקיית wwwroot אם אינה קיימת
-            }
+                              // בדיקת סוג קובץ
+                              var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
+                              var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+                              
+                              if (!allowedExtensions.Contains(fileExtension))
+                                  return BadRequest(new { message = "סוג קובץ לא תקין" });
 
-            if (!Directory.Exists(folderPath))
-            {
-                Directory.CreateDirectory(folderPath); // לא שונה
-            }
+                              // העלאה ל-Cloudinary
+                              using var stream = file.OpenReadStream();
+                              var uploadParams = new ImageUploadParams()
+                              {
+                                  File = new FileDescription(file.FileName, stream),
+                                  PublicId = $"products/{Guid.NewGuid()}",
+                                  Transformation = new Transformation()
+                                      .Width(800)
+                                      .Height(600)
+                                      .Crop("limit")
+                                      .Quality("auto")
+                                      .FetchFormat("auto")
+                              };
 
-            var filePath = Path.Combine(folderPath, uniqueFileName);
+                              var uploadResult = await _cloudinary.UploadAsync(uploadParams);
 
-            try
-            {
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream); // לא שונה
-                }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}"); // שינוי: טיפול בשגיאות בעת כתיבת הקובץ
-            }
+                              if (uploadResult.Error != null)
+                              {
+                                  return StatusCode(500, new { message = "שגיאה בהעלאת התמונה", error = uploadResult.Error.Message });
+                              }
 
-            return Ok(new { imageUrl = $"{uniqueFileName}" }); // לא שונה
-        }
-    }
-}
+                              // החזרת URL של התמונה
+                              return Ok(new { imageUrl = uploadResult.SecureUrl.ToString() });
+                          }
+                          catch (Exception ex)
+                          {
+                              return StatusCode(500, new { message = "שגיאה בהעלאת התמונה", error = ex.Message });
+                          }
+                      }
 
+                      [HttpDelete("delete/{publicId}")]
+                      public async Task<IActionResult> DeleteImage(string publicId)
+                      {
+                          try
+                          {
+                              // החלף / ב-_ כי URL encoding
+                              publicId = publicId.Replace("_", "/");
+                
+                              var deleteParams = new DeletionParams(publicId);
+                              var result = await _cloudinary.DestroyAsync(deleteParams);
+                
+                              if (result.Result == "ok")
+                              {
+                                  return Ok(new { message = "התמונה נמחקה בהצלחה" });
+                              }
+                              else
+                              {
+                                  return BadRequest(new { message = "לא ניתן למחוק את התמונה" });
+                              }
+                          }
+                          catch (Exception ex)
+                          {
+                              return StatusCode(500, new { 
+                                  message = "שגיאה במחיקת התמונה", 
+                                  error = ex.Message 
+                              });
+                          }
+                      }
 
+                      [HttpGet("test")]
+                      public IActionResult Test()
+                      {
+                          return Ok(new { message = "Image controller is working!", timestamp = DateTime.Now });
+                      }
+                  }
+              }

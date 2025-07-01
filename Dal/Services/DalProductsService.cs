@@ -46,7 +46,9 @@ namespace Dal.Services
         public List<ProductsSum> Update(ProductsSum product)
         {
 
+
             
+
             dbcontext.ProductsSums.Update(product);
             dbcontext.SaveChanges();
             return Get();

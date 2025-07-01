@@ -18,23 +18,18 @@ namespace BL.Services
         {
             this.Dal = dal;
         }
-
-
         public int Add(int custId, int? empId)
         {
             Order o = new()
-
             {
-                
-                OrderDate= DateOnly.FromDateTime(DateTime.Today).ToShortDateString(),
+                OrderDate = DateOnly.FromDateTime(DateTime.Today).ToShortDateString(),
                 CustId = custId,
-
-                EmpId = empId==0?empId:null,
-
+                EmpId = empId ?? 0, // Fix for CS8629: Use null-coalescing operator to handle nullable value type
                 Sent = false
             };
-           return  Dal.Orders.Create(o);
+            return Dal.Orders.Create(o);
         }
+        
 
         public List<BLOrder> addDetails(List<BLOrderDetail> list,int orderId)
         {
@@ -49,6 +44,7 @@ namespace BL.Services
                 };
 
                 Dal.Products.UpdateSum(item.ProdId, item.Count);
+
 
                 dalList.Add(od);
             }
@@ -68,23 +64,22 @@ namespace BL.Services
 
         public List<BLOrder> Get()
         {
-
             List<Order> dallist = Dal.Orders.Get();
             List<BLOrder> bllist = new();
 
             foreach (var item in dallist)
             {
-                string email = null;
-                string name = null;
+                string? email = null; // Fix CS8600: Use nullable type for email
+                string? name = null;  // Fix CS8600: Use nullable type for name
 
-                if (item.EmpId.HasValue) // Check if EmpId has a value
+                if (item.EmpId != 0) // Fix: Check if EmpId is not zero instead of using HasValue  
                 {
-                    email = Dal.Employees.getByID(item.EmpId.Value).Egmail; // Use .Value to access the int value
-                    name = Dal.Employees.getByID(item.EmpId.Value).Ename;
+                    var employee = Dal.Employees.getByID(item.EmpId); // Ensure employee is fetched only once
+                    email = employee?.Egmail; // Use null-conditional operator to avoid null reference
+                    name = employee?.Ename;  // Use null-conditional operator to avoid null reference
                 }
 
                 bllist.Add(new BLOrder(item, email, name));
-
             }
             return bllist;
         }
@@ -94,20 +89,18 @@ namespace BL.Services
             List<Order> dallist = Dal.Orders.GetForCustomer(custId);
             List<BLOrder> bllist = new();
 
-
             foreach (var item in dallist)
             {
                 string email = null;
                 string name = null;
 
-                if (item.EmpId.HasValue) // Check if EmpId has a value
+                if (item.EmpId != 0) // Fix: Check if EmpId is not zero instead of using HasValue  
                 {
-                    email = Dal.Employees.getByID(item.EmpId.Value).Egmail; // Use .Value to access the int value
-                    name = Dal.Employees.getByID(item.EmpId.Value).Ename;
+                    email = Dal.Employees.getByID(item.EmpId).Egmail;
+                    name = Dal.Employees.getByID(item.EmpId).Ename;
                 }
 
                 bllist.Add(new BLOrder(item, email, name));
-
             }
             return bllist;
         }
@@ -180,7 +173,6 @@ namespace BL.Services
             });
         }
 
-       
-
+  
     }
 }

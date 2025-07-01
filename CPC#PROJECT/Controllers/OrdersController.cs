@@ -20,7 +20,6 @@ namespace CPC_PROJECT.Controllers
             return Ok(orders.Get()); //new List<string>() { "sara", "shira", "bracha" };  
         }
 
-      
 
         // להחזיר רשימת כל ההזמנות
         [HttpGet("GetByCustomer/{id}")]
@@ -33,6 +32,7 @@ namespace CPC_PROJECT.Controllers
         {
             return Ok(orders.GetForEmployee(id));
         }
+
 
         [HttpGet("GetCompletedByEmployee/{id}")]
         public IActionResult GetCompletedByemp(int id)
@@ -49,6 +49,7 @@ namespace CPC_PROJECT.Controllers
         public IActionResult Add(int id,int? empId, [FromBody] List<BLOrderDetail> list)
         {
             int a = orders.Add(id,empId);
+
 
             return Ok(orders.addDetails(list, a));
 
@@ -69,6 +70,7 @@ namespace CPC_PROJECT.Controllers
             orders.AssignOrders(empId, orderList);
 
         }
+
 
 
 

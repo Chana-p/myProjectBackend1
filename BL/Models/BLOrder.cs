@@ -12,7 +12,7 @@ namespace BL.Models
   public  class BLOrder
     {
 
-        public int OrderId { get; set; }
+        public int OrderId { get; }
 
         public string OrderDate { get; set; }
         public int CustId { get; set; }
@@ -21,13 +21,15 @@ namespace BL.Models
         public string? NameToConnection { get; set; }
         public string? PaymentType { get; set; }
         public bool? Sent { get; set; }
-        
+
         public BLOrder(Order o)
         {
             this.OrderId = o.OrderId;
             this.CustId = o.CustId;
 
-            this.EmpId = o.EmpId ?? 0;
+
+            this.EmpId = o.EmpId ;
+
 
             this.Sent = o.Sent;
         }
@@ -36,8 +38,6 @@ namespace BL.Models
             this.OrderId = o.OrderId;
             this.CustId = o.CustId;
             this.OrderDate = o.OrderDate;
-            this.EmpId = o.EmpId ?? 0;
-
             this.PaymentType = o.PaymentType;
             this.Sent = o.Sent;
             this.EmailToConnection = empEmail;

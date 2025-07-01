@@ -11,6 +11,8 @@ namespace BL.Api
    public interface IBLOrders
     {
 
+
+
         int Add(int custId,int? empId);
         List<BLOrder> addDetails(List<BLOrderDetail> list,int orderId);
         void UpdateSending(int orderId, int empId);
@@ -24,6 +26,7 @@ namespace BL.Api
         List<BLOrder> GetCompletedForEmployee(int empId);
 
         void AssignOrders(int empId, List<BLOrder> ordList);
+
 
 
     }
